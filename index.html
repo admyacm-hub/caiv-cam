@@ -20,6 +20,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 90px; /* Evita que o cabeçalho fixo sobreponha o conteúdo ao clicar nos links do menu */
         }
 
         * {
@@ -206,14 +207,12 @@
             font-size: 2.3rem;
             margin-bottom: 20px;
             color: var(--accent);
-            animation: fadeInDown 0.8s ease-out;
         }
 
         .hero p {
             font-size: 1.15rem;
             max-width: 700px;
             margin: 0 auto 30px auto;
-            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero-buttons {
@@ -221,7 +220,6 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out;
         }
 
         .btn {
@@ -253,7 +251,7 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
-        /* Sections & Reveal Effects */
+        /* Sections */
         section {
             padding: 80px 5%;
             transition: var(--transition);
@@ -261,17 +259,6 @@
 
         section:nth-child(even) {
             background-color: var(--white);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .section-title {
@@ -525,17 +512,6 @@
             font-size: 0.9rem;
         }
 
-        /* Keyframe Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* Responsive Media Queries for Mobile & Tablet */
         @media (max-width: 900px) {
             .menu-toggle {
@@ -554,8 +530,6 @@
                 box-shadow: 0 15px 25px rgba(0,0,0,0.1);
                 display: none;
                 border-top: 1px solid #eee;
-                transform-origin: top;
-                animation: fadeInDown 0.3s ease-out;
             }
 
             .nav-links.active {
@@ -626,7 +600,7 @@
         </div>
     </section>
 
-    <section id="sobre" class="reveal">
+    <section id="sobre">
         <div class="section-title">
             <h2>Sobre o CAIVCAM</h2>
         </div>
@@ -636,7 +610,7 @@
         </div>
     </section>
 
-    <section id="tipos" class="reveal">
+    <section id="tipos">
         <div class="section-title">
             <h2>Definição e Tipos de Violência Doméstica</h2>
         </div>
@@ -686,7 +660,7 @@
         </div>
     </section>
 
-    <section id="servicos" class="reveal">
+    <section id="servicos">
         <div class="section-title">
             <h2>Nossos Serviços e Apoio</h2>
         </div>
@@ -714,7 +688,7 @@
         </div>
     </section>
 
-    <section id="contactos" class="reveal">
+    <section id="contactos">
         <div class="section-title">
             <h2>Contactos e Denúncia Segura</h2>
         </div>
@@ -756,7 +730,6 @@
     </footer>
 
     <script>
-        // Menu Mobile Toggle
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.querySelector('.nav-links');
 
@@ -764,14 +737,50 @@
             navLinks.classList.toggle('active');
         });
 
-        // Fechar menu mobile ao clicar em qualquer link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
         });
 
-        // Efeito Reveal (Fade-in ao fazer scroll)
-        const revealElements = document.querySelectorAll('.reveal');
-        function checkReveal() {
-            const window
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active-link');
+                if (item.getAttribute('href').includes(current)) {
+                    item.classList.add('active-link');
+                }
+            });
+        });
+
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Mensagem enviada com sucesso! O CAIVCAM entrará em contacto sob rigoroso sigilo e segurança.');
+            document.getElementById('safeForm').reset();
+        }
+    </script>
+</body>
+</html>
