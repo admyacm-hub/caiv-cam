@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAIVCAM - Painel de Administração Premium</title>
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+    <title>CAIVCAM - Painel de Administração</title>
+    <!-- Favicon carregado do GitHub -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/yannikmateus/caivcam/main/favicon.ico">
     <style>
         :root {
             --primary-purple: #5a2d82;
@@ -43,11 +44,12 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
         }
 
         .login-card {
             background: var(--white);
-            padding: 40px;
+            padding: 30px 25px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             width: 100%;
@@ -57,20 +59,17 @@
         }
 
         .login-logo {
-            width: 54px;
-            height: 54px;
+            width: 64px;
+            height: 64px;
             margin: 0 auto 15px auto;
-            background: rgba(90, 45, 130, 0.08);
+            object-fit: contain;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .login-card h2 {
             color: var(--primary-purple);
             margin-bottom: 5px;
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .form-group {
@@ -110,7 +109,6 @@
             opacity: 0.9;
         }
 
-        /* Botão estilizado de Voltar ao Site */
         .btn-back-site {
             display: flex;
             align-items: center;
@@ -142,6 +140,7 @@
             width: 100%;
             height: 100%;
             display: none;
+            position: relative;
         }
 
         sidebar {
@@ -151,6 +150,8 @@
             display: flex;
             flex-direction: column;
             border-right: 3px solid var(--accent-gold);
+            transition: transform 0.3s ease;
+            z-index: 100;
         }
 
         .sidebar-header {
@@ -159,15 +160,22 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
+        .sidebar-logo {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            margin-bottom: 5px;
+            border-radius: 50%;
+        }
+
         .sidebar-header h1 {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--accent-gold);
-            margin-top: 5px;
         }
 
         .sidebar-menu {
             list-style: none;
-            padding: 20px 0;
+            padding: 15px 0;
             flex-grow: 1;
             overflow-y: auto;
         }
@@ -177,7 +185,7 @@
             padding: 12px 20px;
             color: var(--white);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             transition: background 0.2s, border-left 0.2s;
         }
 
@@ -191,25 +199,42 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            width: 100%;
         }
 
         header {
             background-color: var(--white);
-            padding: 15px 30px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--gray-border);
+            min-height: 60px;
         }
 
-        .user-info {
+        .header-left {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary-purple);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .content-area {
-            padding: 30px;
+            padding: 20px;
             overflow-y: auto;
             flex-grow: 1;
         }
@@ -224,45 +249,51 @@
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .metric-card {
             background: var(--white);
-            padding: 20px;
+            padding: 18px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             border-left: 4px solid var(--accent-gold);
         }
 
         .metric-card h3 {
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .metric-card .value {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             color: var(--primary-purple);
         }
 
-        .data-table {
+        .table-responsive {
             width: 100%;
+            overflow-x: auto;
             background: var(--white);
             border-radius: 8px;
-            border-collapse: collapse;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-top: 20px;
+            margin-top: 15px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
         }
 
         .data-table th, .data-table td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--gray-border);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .data-table th {
@@ -278,16 +309,59 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
+            white-space: nowrap;
         }
 
         .filter-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
             margin-bottom: 20px;
             background: var(--white);
             padding: 15px;
             border-radius: 8px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 90;
+        }
+
+        @media (max-width: 900px) {
+            sidebar {
+                position: fixed;
+                height: 100%;
+                left: -260px;
+                top: 0;
+            }
+
+            sidebar.mobile-open {
+                left: 0;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .content-area {
+                padding: 15px;
+            }
+
+            header h2 {
+                font-size: 17px !important;
+            }
         }
     </style>
 </head>
@@ -296,10 +370,8 @@
     <!-- TELA DE LOGIN -->
     <div id="login-screen">
         <div class="login-card">
-            <!-- Logotipo Institucional CAIVCAM -->
-            <div class="login-logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d4af37" width="32px" height="32px"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </div>
+            <!-- Logotipo Atualizado do GitHub -->
+            <img src="https://raw.githubusercontent.com/yannikmateus/caivcam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logotipo CAIVCAM" class="login-logo" onerror="this.style.display='none'">
             <h2>CAIVCAM Admin</h2>
             <p style="font-size: 12px; color: #666; margin-bottom: 20px;">Centro de Apoio Integrado à Vítima de Violência da Camama</p>
             
@@ -314,7 +386,6 @@
             
             <button class="btn-gold" onclick="handleLogin()">Entrar no Sistema</button>
             
-            <!-- Botão Voltar ao Site Melhorado -->
             <a href="index.html" class="btn-back-site">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                 Voltar para o Site Principal
@@ -324,16 +395,15 @@
         </div>
     </div>
 
+    <!-- OVERLAY MOBILE -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <!-- PAINEL PRINCIPAL -->
     <div id="app-container">
-        <sidebar>
+        <sidebar id="app-sidebar">
             <div class="sidebar-header">
-                <a href="index.html" style="color: var(--accent-gold); font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 8px; font-weight: 600;">
-                    ← Voltar ao Site
-                </a>
-                <div style="display: flex; justify-content: center; margin-bottom: 4px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d4af37" width="22px" height="22px"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                </div>
+                <a href="index.html" style="color: var(--accent-gold); font-size: 11px; text-decoration: none; display: block; margin-bottom: 5px;">← Voltar ao Site</a>
+                <img src="https://raw.githubusercontent.com/yannikmateus/caivcam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logo" class="sidebar-logo" onerror="this.style.display='none'">
                 <h1>CAIVCAM</h1>
                 <p style="font-size: 10px; color: #d4af37;">Portal Institucional</p>
             </div>
@@ -352,9 +422,12 @@
 
         <main>
             <header>
-                <h2 id="page-title" style="color: var(--primary-purple); font-size: 20px;">Painel Estatístico Interativo</h2>
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                    <h2 id="page-title" style="color: var(--primary-purple); font-size: 18px;">Visão Geral & Estatísticas</h2>
+                </div>
                 <div class="user-info">
-                    <span style="font-size: 14px; font-weight: 600;">Gestor CAIVCAM</span>
+                    <span style="font-size: 13px; font-weight: 600; display: inline-block;">Gestor</span>
                     <button class="btn-action" onclick="handleLogout()">Sair</button>
                 </div>
             </header>
@@ -365,7 +438,7 @@
                 <div id="dashboard" class="tab-content active">
                     <div class="filter-bar">
                         <div>
-                            <label style="font-weight: bold; font-size: 13px; margin-right: 10px;">Filtrar Período:</label>
+                            <label style="font-weight: bold; font-size: 13px; margin-right: 8px;">Filtrar Período:</label>
                             <select id="time-filter" style="padding: 6px; border-radius: 4px; border: 1px solid var(--gray-border);">
                                 <option value="diario">Diário</option>
                                 <option value="semanal">Semanal</option>
@@ -375,7 +448,7 @@
                                 <option value="anual">Anual</option>
                             </select>
                         </div>
-                        <button class="btn-action" style="background-color: var(--accent-gold); color: var(--primary-purple-dark); font-weight: bold;" onclick="exportPDF()">Exportar Relatório PDF</button>
+                        <button class="btn-action" style="background-color: var(--accent-gold); color: var(--primary-purple-dark); font-weight: bold;" onclick="exportPDF()">Exportar PDF</button>
                     </div>
 
                     <div class="card-grid">
@@ -397,42 +470,44 @@
                         </div>
                     </div>
 
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <h3 style="margin-bottom: 15px; color: var(--primary-purple);">Distribuição Recente de Ocorrências</h3>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID do Caso</th>
-                                    <th>Categoria</th>
-                                    <th>Vítima / Responsável</th>
-                                    <th>Data Registo</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#CC-2026-089</td>
-                                    <td>Abandono de Idosos</td>
-                                    <td>M. Silva</td>
-                                    <td>01/09/2026</td>
-                                    <td>Em Acompanhamento</td>
-                                </tr>
-                                <tr>
-                                    <td>#CC-2026-088</td>
-                                    <td>Fuga à Prestação de Alimentos</td>
-                                    <td>A. Domingos</td>
-                                    <td>31/08/2026</td>
-                                    <td>Encaminhado Jurídico</td>
-                                </tr>
-                                <tr>
-                                    <td>#CC-2026-087</td>
-                                    <td>Violência Psicológica / Doméstica</td>
-                                    <td>Anonimizado</td>
-                                    <td>30/08/2026</td>
-                                    <td>Concluído</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div style="background: var(--white); padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <h3 style="margin-bottom: 12px; color: var(--primary-purple); font-size: 15px;">Distribuição Recente de Ocorrências</h3>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID do Caso</th>
+                                        <th>Categoria</th>
+                                        <th>Vítima / Responsável</th>
+                                        <th>Data Registo</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#CC-2026-089</td>
+                                        <td>Abandono de Idosos</td>
+                                        <td>M. Silva</td>
+                                        <td>01/09/2026</td>
+                                        <td>Em Acompanhamento</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#CC-2026-088</td>
+                                        <td>Fuga à Prestação de Alimentos</td>
+                                        <td>A. Domingos</td>
+                                        <td>31/08/2026</td>
+                                        <td>Encaminhado Jurídico</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#CC-2026-087</td>
+                                        <td>Violência Psicológica / Doméstica</td>
+                                        <td>Anonimizado</td>
+                                        <td>30/08/2026</td>
+                                        <td>Concluído</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -539,6 +614,13 @@
             document.getElementById('login-error').style.display = 'none';
         }
 
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('app-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        }
+
         function switchTab(tabId, event) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
@@ -547,6 +629,10 @@
             event.target.classList.add('active');
             
             document.getElementById('page-title').innerText = event.target.innerText;
+
+            if (window.innerWidth <= 900) {
+                toggleMobileMenu();
+            }
         }
 
         function exportPDF() {
