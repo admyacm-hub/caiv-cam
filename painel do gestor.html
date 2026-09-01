@@ -3,626 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAIVCAM - Painel de Administração Premium (Responsivo)</title>
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+    <title>CAIVCAM - Painel do Gestor - Login</title>
+    <link rel="icon" type="image/jpeg" href="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-purple: #5a2d82;
-            --primary-purple-dark: #3f1e5a;
-            --accent-gold: #d4af37;
-            --bg-light: #f9f9f9;
+            --primary: #5a2d82;
+            --accent: #d4af37;
+            --bg-color: #f9f9f9;
             --text-dark: #333333;
             --white: #ffffff;
-            --gray-border: #e0e0e0;
+            --transition: all 0.3s ease;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-light);
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(rgba(90, 45, 130, 0.85), rgba(90, 45, 130, 0.92)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80') center/cover;
             color: var(--text-dark);
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Tela de Login */
-        #login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
             padding: 20px;
+        }
+
+        h1, h2, h3, .btn {
+            font-family: 'Montserrat', sans-serif;
         }
 
         .login-card {
             background: var(--white);
-            padding: 30px 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             text-align: center;
-            border-top: 5px solid var(--accent-gold);
+            border-top: 5px solid var(--accent);
+        }
+
+        .login-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(90, 45, 130, 0.2);
         }
 
         .login-card h2 {
-            color: var(--primary-purple);
-            margin-bottom: 15px;
-            font-size: 22px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .login-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--primary-purple);
-            font-size: 14px;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid var(--gray-border);
-            border-radius: 6px;
-            font-size: 16px; /* Evita zoom automático no iOS */
-        }
-
-        .btn-gold {
-            background-color: var(--accent-gold);
-            color: var(--primary-purple-dark);
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            transition: opacity 0.2s;
-        }
-
-        .btn-gold:hover {
-            opacity: 0.9;
-        }
-
-        /* Layout do Painel */
-        #app-container {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            display: none;
-            position: relative;
-        }
-
-        sidebar {
-            width: 260px;
-            background-color: var(--primary-purple);
-            color: var(--white);
-            display: flex;
-            flex-direction: column;
-            border-right: 3px solid var(--accent-gold);
-            position: fixed;
-            height: 100%;
-            z-index: 100;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-        }
-
-        .sidebar-header h1 {
-            font-size: 18px;
-            color: var(--accent-gold);
-        }
-
-        .close-sidebar {
-            display: none;
-            position: absolute;
-            right: 15px;
-            top: 20px;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 15px 0;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .sidebar-menu li a {
-            display: block;
-            padding: 14px 20px;
-            color: var(--white);
-            text-decoration: none;
-            font-size: 14px;
-            transition: background 0.2s, border-left 0.2s;
-        }
-
-        .sidebar-menu li a:hover, .sidebar-menu li a.active {
-            background-color: rgba(255,255,255,0.1);
-            border-left: 4px solid var(--accent-gold);
-        }
-
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            margin-left: 260px;
-            width: calc(100% - 260px);
-            transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
-        }
-
-        header {
-            background-color: var(--white);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--gray-border);
-            min-height: 60px;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 22px;
-            color: var(--primary-purple);
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .content-area {
-            padding: 20px;
-            overflow-y: auto;
-            flex-grow: 1;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .metric-card {
-            background: var(--white);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--accent-gold);
-        }
-
-        .metric-card h3 {
-            font-size: 13px;
-            color: #666;
+            color: var(--primary);
             margin-bottom: 8px;
         }
 
-        .metric-card .value {
-            font-size: 22px;
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: #fdfdfd;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(90, 45, 130, 0.1);
+            background-color: var(--white);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
             font-weight: bold;
-            color: var(--primary-purple);
-        }
-
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-top: 15px;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 600px;
-        }
-
-        .data-table th, .data-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--gray-border);
-            font-size: 13px;
-        }
-
-        .data-table th {
-            background-color: var(--primary-purple);
-            color: var(--white);
-            white-space: nowrap;
-        }
-
-        .btn-action {
-            background: var(--primary-purple);
-            color: var(--white);
-            border: none;
-            padding: 8px 14px;
-            border-radius: 4px;
             cursor: pointer;
-            font-size: 13px;
-            white-space: nowrap;
-        }
-
-        .filter-bar {
-            display: flex;
-            justify-content: space-between;
+            border: none;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
-            background: var(--white);
-            padding: 15px;
-            border-radius: 8px;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 8px;
+            text-decoration: none;
         }
 
-        .card-container {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            margin-bottom: 12px;
         }
 
-        /* MEDIA QUERIES PARA MÓVEIS E TABLETS */
-        @media (max-width: 1024px) {
-            sidebar {
-                transform: translateX(-100%);
-            }
-            sidebar.open {
-                transform: translateX(0);
-            }
-            .close-sidebar {
-                display: block;
-            }
-            main {
-                margin-left: 0;
-                width: 100%;
-            }
-            .menu-toggle {
-                display: block;
-            }
+        .btn-primary:hover {
+            background-color: #4a236d;
+            transform: translateY(-2px);
         }
 
-        @media (max-width: 600px) {
-            .content-area {
-                padding: 15px;
-            }
-            header {
-                padding: 10px 15px;
-            }
-            #page-title {
-                font-size: 16px !important;
-            }
-            .user-info span {
-                display: none; /* Oculta nome no telemóvel para poupar espaço */
-            }
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .filter-bar button {
-                width: 100%;
-            }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(90, 45, 130, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <!-- TELA DE LOGIN -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>CAIVCAM Admin</h2>
-            <p style="font-size: 12px; color: #666; margin-bottom: 20px;">Centro de Apoio Integrado à Vítima de Violência da Camama</p>
+    <div class="login-card">
+        <img src="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logo CAIVCAM">
+        <h2>Painel do Gestor</h2>
+        <p>Acesso restrito à administração do CAIVCAM</p>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label>Utilizador</label>
-                <input type="text" id="username" placeholder="Digite seu utilizador" value="admin_caivcam">
+                <label for="username">Utilizador / E-mail</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="username" placeholder="Digite seu utilizador" required>
+                </div>
             </div>
+
             <div class="form-group">
-                <label>Palavra-passe</label>
-                <input type="password" id="password" placeholder="Digite sua palavra-passe" value="CaivCam2026">
+                <label for="password">Palavra-passe</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Digite sua palavra-passe" required>
+                </div>
             </div>
-            <button class="btn-gold" onclick="handleLogin()">Entrar no Sistema</button>
-            <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">Palavra-passe incorreta. Utilize: CaivCam2026</p>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel
+            </button>
+        </form>
+
+        <a href="index.html" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Voltar à Página Inicial
+        </a>
+
+        <div class="footer-note">
+            &copy; 2026 CAIVCAM. Todos os direitos reservados.
         </div>
     </div>
 
-    <!-- PAINEL PRINCIPAL -->
-    <div id="app-container">
-        <sidebar id="sidebar">
-            <div class="sidebar-header">
-                <h1>CAIVCAM</h1>
-                <p style="font-size: 10px; color: #d4af37;">Portal Institucional</p>
-                <button class="close-sidebar" onclick="toggleSidebar()">×</button>
-            </div>
-            <ul class="sidebar-menu">
-                <li><a href="#" onclick="switchTab('dashboard', event); closeSidebarMobile()" class="active">Visão Geral & Estatísticas</a></li>
-                <li><a href="#" onclick="switchTab('psicologico', event); closeSidebarMobile()">Atendimento Psicológico</a></li>
-                <li><a href="#" onclick="switchTab('juridico', event); closeSidebarMobile()">Atendimento Jurídico</a></li>
-                <li><a href="#" onclick="switchTab('vulneraveis', event); closeSidebarMobile()">Famílias & Jovens (Lei)</a></li>
-                <li><a href="#" onclick="switchTab('criancas', event); closeSidebarMobile()">Crianças Violentadas</a></li>
-                <li><a href="#" onclick="switchTab('familia-abandono', event); closeSidebarMobile()">Paternidade, Alimentos & Grávidas</a></li>
-                <li><a href="#" onclick="switchTab('idosos', event); closeSidebarMobile()">Abandono de Idosos</a></li>
-                <li><a href="#" onclick="switchTab('comunidade', event); closeSidebarMobile()">Conflitos Comunitários</a></li>
-                <li><a href="#" onclick="switchTab('config', event); closeSidebarMobile()">Segurança & Definições</a></li>
-            </ul>
-        </sidebar>
-
-        <main>
-            <header>
-                <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-                    <h2 id="page-title" style="color: var(--primary-purple); font-size: 18px;">Visão Geral & Estatísticas</h2>
-                </div>
-                <div class="user-info">
-                    <span style="font-size: 13px; font-weight: 600;">Gestor CAIVCAM</span>
-                    <button class="btn-action" style="padding: 6px 10px; font-size: 12px;" onclick="handleLogout()">Sair</button>
-                </div>
-            </header>
-
-            <div class="content-area">
-                
-                <!-- DASHBOARD / ESTATÍSTICAS -->
-                <div id="dashboard" class="tab-content active">
-                    <div class="filter-bar">
-                        <div style="width: 100%; max-width: 300px;">
-                            <label style="font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px;">Filtrar Período:</label>
-                            <select id="time-filter" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--gray-border);">
-                                <option value="diario">Diário</option>
-                                <option value="semanal">Semanal</option>
-                                <option value="mensal" selected>Mensal</option>
-                                <option value="trimestral">Trimestral</option>
-                                <option value="semestral">Semestral</option>
-                                <option value="anual">Anual</option>
-                            </select>
-                        </div>
-                        <button class="btn-action" style="background-color: var(--accent-gold); color: var(--primary-purple-dark); font-weight: bold;" onclick="exportPDF()">Exportar Relatório PDF</button>
-                    </div>
-
-                    <div class="card-grid">
-                        <div class="metric-card">
-                            <h3>Total de Atendimentos</h3>
-                            <div class="value">1,284</div>
-                        </div>
-                        <div class="metric-card">
-                            <h3>Casos Psicológicos</h3>
-                            <div class="value">412</div>
-                        </div>
-                        <div class="metric-card">
-                            <h3>Apoio Jurídico</h3>
-                            <div class="value">328</div>
-                        </div>
-                        <div class="metric-card">
-                            <h3>Resoluções Comunitárias</h3>
-                            <div class="value">185</div>
-                        </div>
-                    </div>
-
-                    <div class="card-container">
-                        <h3 style="margin-bottom: 10px; color: var(--primary-purple); font-size: 16px;">Distribuição Recente de Ocorrências</h3>
-                        <div class="table-responsive">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID do Caso</th>
-                                        <th>Categoria</th>
-                                        <th>Vítima / Responsável</th>
-                                        <th>Data Registo</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#CC-2026-089</td>
-                                        <td>Abandono de Idosos</td>
-                                        <td>M. Silva</td>
-                                        <td>01/09/2026</td>
-                                        <td>Em Acompanhamento</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#CC-2026-088</td>
-                                        <td>Fuga à Prestação de Alimentos</td>
-                                        <td>A. Domingos</td>
-                                        <td>31/08/2026</td>
-                                        <td>Encaminhado Jurídico</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#CC-2026-087</td>
-                                        <td>Violência Psicológica</td>
-                                        <td>Anonimizado</td>
-                                        <td>30/08/2026</td>
-                                        <td>Concluído</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PSICOLÓGICO -->
-                <div id="psicologico" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Registo e Acompanhamento Psicológico</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Módulo dedicado ao histórico de sessões, evolução clínica e notas de atendimento psicológico confidencial.</p>
-                        <button class="btn-action">+ Novo Registo Psicológico</button>
-                    </div>
-                </div>
-
-                <!-- JURÍDICO -->
-                <div id="juridico" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Atendimento Jurídico e Encaminhamentos</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Emissão de pareceres jurídicos, notificações formais e submissão aos órgãos competentes.</p>
-                        <button class="btn-action">+ Novo Processo Jurídico</button>
-                    </div>
-                </div>
-
-                <!-- VULNERÁVEIS & JOVENS -->
-                <div id="vulneraveis" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Famílias Vulneráveis & Jovens em Conflito com a Lei</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Programas de reinserção social, mediação familiar e acompanhamento de menores.</p>
-                        <button class="btn-action">+ Registar Caso</button>
-                    </div>
-                </div>
-
-                <!-- CRIANÇAS VIOLENTADAS -->
-                <div id="criancas" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Registo de Crianças Violentadas</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Proteção prioritária de menores, intervenção urgente e salvaguarda institucional.</p>
-                        <button class="btn-action">+ Registar Ocorrência de Menor</button>
-                    </div>
-                </div>
-
-                <!-- FAMÍLIA & ABANDONO -->
-                <div id="familia-abandono" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Paternidade, Alimentos & Mulher Grávida</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Gestão de casos de fuga à paternidade/maternidade, prestação de alimentos e abandono de mulher grávida.</p>
-                        <button class="btn-action">+ Registar Denúncia Familiar</button>
-                    </div>
-                </div>
-
-                <!-- IDOSOS -->
-                <div id="idosos" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Casos de Abandono de Idosos</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Apoio e acolhimento especializado para proteção da terceira idade na comunidade da Camama.</p>
-                        <button class="btn-action">+ Registar Proteção de Idoso</button>
-                    </div>
-                </div>
-
-                <!-- COMUNIDADE -->
-                <div id="comunidade" class="tab-content">
-                    <div class="card-container">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Resolução de Conflitos ao Nível das Comunidades</h3>
-                        <p style="margin-bottom: 15px; font-size: 13px;">Mediação comunitária e resolução pacífica de disputas locais sob supervisão do CAIVCAM.</p>
-                        <button class="btn-action">+ Registar Mediação</button>
-                    </div>
-                </div>
-
-                <!-- CONFIGURAÇÕES / SEGURANÇA -->
-                <div id="config" class="tab-content">
-                    <div class="card-container" style="max-width: 450px;">
-                        <h3 style="color: var(--primary-purple); margin-bottom: 12px; font-size: 16px;">Segurança e Alteração de Credenciais</h3>
-                        <div class="form-group">
-                            <label>Palavra-passe Atual</label>
-                            <input type="password" id="current-pass" placeholder="••••••••">
-                        </div>
-                        <div class="form-group">
-                            <label>Nova Palavra-passe</label>
-                            <input type="password" id="new-pass" placeholder="Mínimo 6 caracteres">
-                        </div>
-                        <button class="btn-gold" onclick="updatePassword()">Atualizar Palavra-passe</button>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-    </div>
-
     <script>
-        function handleLogin() {
-            const pass = document.getElementById('password').value;
-            const error = document.getElementById('login-error');
-            
-            if (pass === 'CaivCam2026') {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('app-container').style.display = 'flex';
-            } else {
-                error.style.display = 'block';
-            }
-        }
-
-        function handleLogout() {
-            document.getElementById('app-container').style.display = 'none';
-            document.getElementById('login-screen').style.display = 'flex';
-            document.getElementById('password').value = '';
-            document.getElementById('login-error').style.display = 'none';
-        }
-
-        function switchTab(tabId, event) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            if (event && event.target) {
-                event.target.classList.add('active');
-                document.getElementById('page-title').innerText = event.target.innerText;
-            }
-        }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
-        }
-
-        function closeSidebarMobile() {
-            if (window.innerWidth <= 1024) {
-                document.getElementById('sidebar').classList.remove('open');
-            }
-        }
-
-        function exportPDF() {
-            alert('Gerando e exportando relatório estatístico do CAIVCAM em formato PDF...');
-        }
-
-        function updatePassword() {
-            const currentPass = document.getElementById('current-pass').value;
-            const newPass = document.getElementById('new-pass').value;
-            if(currentPass === 'CaivCam2026' && newPass.length >= 6) {
-                alert('Palavra-passe alterada com sucesso!');
-                document.getElementById('current-pass').value = '';
-                document.getElementById('new-pass').value = '';
-            } else {
-                alert('Verifique a palavra-passe atual (CaivCam2026) e certifique-se de que a nova possui pelo menos 6 caracteres.');
-            }
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('username').value;
+            // Exemplo de simulação de login
+            alert('Autenticação simulada com sucesso para: ' + user);
+            // Aqui você pode redirecionar para a interface interna do painel se houver
         }
     </script>
 </body>
