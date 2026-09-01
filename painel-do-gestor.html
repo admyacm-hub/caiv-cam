@@ -56,9 +56,20 @@
             border-top: 5px solid var(--accent-gold);
         }
 
+        .login-logo {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 15px auto;
+            background: rgba(90, 45, 130, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .login-card h2 {
             color: var(--primary-purple);
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             font-size: 24px;
         }
 
@@ -99,6 +110,32 @@
             opacity: 0.9;
         }
 
+        /* Botão estilizado de Voltar ao Site */
+        .btn-back-site {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid var(--gray-border);
+            color: #555;
+            padding: 11px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back-site:hover {
+            background: rgba(90, 45, 130, 0.05);
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
         /* Layout do Painel */
         #app-container {
             display: flex;
@@ -125,6 +162,7 @@
         .sidebar-header h1 {
             font-size: 18px;
             color: var(--accent-gold);
+            margin-top: 5px;
         }
 
         .sidebar-menu {
@@ -258,8 +296,13 @@
     <!-- TELA DE LOGIN -->
     <div id="login-screen">
         <div class="login-card">
+            <!-- Logotipo Institucional CAIVCAM -->
+            <div class="login-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d4af37" width="32px" height="32px"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
             <h2>CAIVCAM Admin</h2>
             <p style="font-size: 12px; color: #666; margin-bottom: 20px;">Centro de Apoio Integrado à Vítima de Violência da Camama</p>
+            
             <div class="form-group">
                 <label>Utilizador</label>
                 <input type="text" id="username" placeholder="Digite seu utilizador" value="admin_caivcam">
@@ -268,7 +311,15 @@
                 <label>Palavra-passe</label>
                 <input type="password" id="password" placeholder="Digite sua palavra-passe" value="CaivCam2026">
             </div>
+            
             <button class="btn-gold" onclick="handleLogin()">Entrar no Sistema</button>
+            
+            <!-- Botão Voltar ao Site Melhorado -->
+            <a href="index.html" class="btn-back-site">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Voltar para o Site Principal
+            </a>
+            
             <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">Palavra-passe incorreta. Utilize: CaivCam2026</p>
         </div>
     </div>
@@ -277,6 +328,12 @@
     <div id="app-container">
         <sidebar>
             <div class="sidebar-header">
+                <a href="index.html" style="color: var(--accent-gold); font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 8px; font-weight: 600;">
+                    ← Voltar ao Site
+                </a>
+                <div style="display: flex; justify-content: center; margin-bottom: 4px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d4af37" width="22px" height="22px"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
                 <h1>CAIVCAM</h1>
                 <p style="font-size: 10px; color: #d4af37;">Portal Institucional</p>
             </div>
