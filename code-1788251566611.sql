@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS denuncias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    protocolo VARCHAR(20) NOT NULL UNIQUE,
+    tipo VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL,
+    contacto VARCHAR(30) NULL,
+    anonimo TINYINT(1) DEFAULT 0,
+    data_criacao DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
