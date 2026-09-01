@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAIVCAM - Painel do Gestor - Login</title>
+    <title>CAIVCAM - Painel do Gestor</title>
     <link rel="icon" type="image/jpeg" href="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,9 +11,11 @@
         :root {
             --primary: #5a2d82;
             --accent: #d4af37;
-            --bg-color: #f9f9f9;
+            --bg-color: #f4f6f9;
             --text-dark: #333333;
             --white: #ffffff;
+            --danger: #d9534f;
+            --success: #28a745;
             --transition: all 0.3s ease;
         }
 
@@ -25,17 +27,23 @@
 
         body {
             font-family: 'Lato', sans-serif;
-            background: linear-gradient(rgba(90, 45, 130, 0.85), rgba(90, 45, 130, 0.92)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80') center/cover;
+            background-color: var(--bg-color);
             color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, .btn {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Login Screen */
+        #login-screen {
+            background: linear-gradient(rgba(90, 45, 130, 0.85), rgba(90, 45, 130, 0.92)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80') center/cover;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-        }
-
-        h1, h2, h3, .btn {
-            font-family: 'Montserrat', sans-serif;
         }
 
         .login-card {
@@ -152,58 +160,307 @@
             transform: translateY(-2px);
         }
 
+        /* Dashboard Screen (Hidden by default) */
+        #dashboard-screen {
+            display: none;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .dash-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .dash-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dash-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .dash-logo h1 {
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .dash-logo span {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .dash-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-logout {
+            background-color: var(--danger);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-logout:hover {
+            opacity: 0.9;
+        }
+
+        .dash-content {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-card i {
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .stat-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .table-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .table-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.92rem;
+        }
+
+        th {
+            background-color: #faf5ff;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-resolved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
         .footer-note {
             margin-top: 20px;
             font-size: 0.8rem;
             color: #888;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <img src="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logo CAIVCAM">
-        <h2>Painel do Gestor</h2>
-        <p>Acesso restrito à administração do CAIVCAM</p>
+    <!-- ECRÃ DE LOGIN -->
+    <div id="login-screen">
+        <div class="login-card">
+            <img src="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logo CAIVCAM">
+            <h2>Painel do Gestor</h2>
+            <p>Acesso restrito à administração do CAIVCAM</p>
 
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label for="username">Utilizador / E-mail</label>
-                <div class="input-icon">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" id="username" placeholder="Digite seu utilizador" required>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Utilizador / E-mail</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="username" placeholder="Digite seu utilizador" required value="admin_caivcam">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Palavra-passe</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="Digite sua palavra-passe" required value="123456">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel
+                </button>
+            </form>
+
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Voltar à Página Inicial
+            </a>
+
+            <div class="footer-note">
+                &copy; 2026 CAIVCAM. Todos os direitos reservados.
+            </div>
+        </div>
+    </div>
+
+    <!-- ECRÃ DO PAINEL DE GESTÃO (CARREGADO APÓS LOGIN) -->
+    <div id="dashboard-screen">
+        <header class="dash-header">
+            <div class="dash-logo">
+                <img src="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logo CAIVCAM">
+                <div>
+                    <h1>CAIVCAM</h1>
+                    <span>Painel Administrativo</span>
+                </div>
+            </div>
+            <div class="dash-user">
+                <span><i class="fa-solid fa-user-shield"></i> Gestor Autorizado</span>
+                <button class="btn-logout" onclick="handleLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </button>
+            </div>
+        </header>
+
+        <div class="dash-content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div class="stat-info">
+                        <h3>28</h3>
+                        <p>Denúncias Registadas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <div class="stat-info">
+                        <h3>14</h3>
+                        <p>Aconselhamentos Jurídicos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                    <div class="stat-info">
+                        <h3>9</h3>
+                        <p>Apoios Psicológicos</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="password">Palavra-passe</label>
-                <div class="input-icon">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="password" placeholder="Digite sua palavra-passe" required>
-                </div>
+            <div class="table-card">
+                <h3>
+                    <span><i class="fa-solid fa-list-check"></i> Últimas Solicitações e Denúncias</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: #666;">Camama, Luanda</span>
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Tipo de Apoio</th>
+                            <th>Contacto</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#DEN-1042</td>
+                            <td>01/09/2026</td>
+                            <td>Denúncia de Violência Física</td>
+                            <td>+244 923 *** 158</td>
+                            <td><span class="badge badge-pending">Pendente</span></td>
+                        </tr>
+                        <tr>
+                            <td>#DEN-1041</td>
+                            <td>31/08/2026</td>
+                            <td>Aconselhamento Jurídico</td>
+                            <td>+244 912 *** 441</td>
+                            <td><span class="badge badge-resolved">Em Atendimento</span></td>
+                        </tr>
+                        <tr>
+                            <td>#DEN-1040</td>
+                            <td>29/08/2026</td>
+                            <td>Apoio Psicológico</td>
+                            <td>+244 931 *** 890</td>
+                            <td><span class="badge badge-resolved">Concluído</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel
-            </button>
-        </form>
-
-        <a href="index.html" class="btn btn-secondary">
-            <i class="fa-solid fa-arrow-left"></i> Voltar à Página Inicial
-        </a>
-
-        <div class="footer-note">
-            &copy; 2026 CAIVCAM. Todos os direitos reservados.
         </div>
     </div>
 
     <script>
         function handleLogin(event) {
             event.preventDefault();
-            const user = document.getElementById('username').value;
-            // Exemplo de simulação de login
-            alert('Autenticação simulada com sucesso para: ' + user);
-            // Aqui você pode redirecionar para a interface interna do painel se houver
+            // Esconde o ecrã de login e mostra o dashboard
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'flex';
+        }
+
+        function handleLogout() {
+            // Volta a mostrar o ecrã de login
+            document.getElementById('dashboard-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('password').value = '';
         }
     </script>
 </body>
