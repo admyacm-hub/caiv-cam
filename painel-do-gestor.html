@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAIVCAM - Painel de Administração</title>
+    <title>CAIVCAM - Painel de Administração Funcional</title>
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/favicon.ico">
     <style>
         :root {
@@ -14,6 +14,8 @@
             --text-dark: #333333;
             --white: #ffffff;
             --gray-border: #e0e0e0;
+            --danger: #d9534f;
+            --success: #5cb85c;
         }
 
         * {
@@ -62,38 +64,6 @@
             border-top: 5px solid var(--accent-gold);
         }
 
-        .login-logo-container {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 15px auto;
-            border-radius: 50%;
-            background: var(--primary-purple);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 2px solid var(--accent-gold);
-        }
-
-        .login-logo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .logo-fallback {
-            color: var(--accent-gold);
-            font-weight: bold;
-            font-size: 16px;
-            display: none;
-        }
-
-        .login-card h2 {
-            color: var(--primary-purple);
-            margin-bottom: 5px;
-            font-size: 22px;
-        }
-
         .form-group {
             margin-bottom: 18px;
             text-align: left;
@@ -107,7 +77,7 @@
             font-size: 14px;
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--gray-border);
@@ -132,30 +102,6 @@
         .btn-gold:hover {
             background-color: #c9a84c;
             transform: translateY(-2px);
-        }
-
-        .btn-back-site {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #fdfaf3;
-            border: 1px solid var(--accent-gold);
-            color: var(--primary-purple);
-            padding: 13px 16px;
-            width: 100%;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 12px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .btn-back-site:hover {
-            background: var(--primary-purple);
-            color: var(--white);
         }
 
         /* Layout do Painel */
@@ -189,61 +135,11 @@
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
 
-        .sidebar-back-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: var(--accent-gold);
-            padding: 9px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            margin-bottom: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .sidebar-back-btn:hover {
-            background: var(--accent-gold);
-            color: var(--primary-purple-dark);
-        }
-
-        .sidebar-logo-container {
-            width: 42px;
-            height: 42px;
-            margin: 0 auto 5px auto;
-            border-radius: 50%;
-            background: var(--primary-purple-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px solid var(--accent-gold);
-        }
-
-        .sidebar-logo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .sidebar-header h1 {
-            font-size: 16px;
-            color: var(--accent-gold);
-        }
-
         .sidebar-menu {
             list-style: none;
             padding: 15px 0;
             flex-grow: 1;
             overflow-y: auto;
-        }
-
-        .sidebar-menu li {
-            margin: 0;
         }
 
         .sidebar-menu li a {
@@ -257,13 +153,8 @@
             border-left: 4px solid transparent;
         }
 
-        .sidebar-menu li a:hover {
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
             background-color: rgba(255,255,255,0.1);
-            border-left: 4px solid var(--accent-gold);
-        }
-
-        .sidebar-menu li a.active {
-            background-color: rgba(255,255,255,0.15);
             border-left: 4px solid var(--accent-gold);
         }
 
@@ -283,30 +174,6 @@
             align-items: center;
             border-bottom: 1px solid var(--gray-border);
             min-height: 60px;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: var(--primary-purple);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .content-area {
@@ -336,12 +203,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             border-left: 4px solid var(--accent-gold);
-            transition: transform 0.3s;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .metric-card h3 {
@@ -381,6 +242,11 @@
         .data-table th {
             background-color: var(--primary-purple);
             color: var(--white);
+            cursor: pointer;
+        }
+
+        .data-table th:hover {
+            background-color: var(--primary-purple-dark);
         }
 
         .btn-action {
@@ -401,6 +267,14 @@
             transform: translateY(-2px);
         }
 
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
         .filter-bar {
             display: flex;
             justify-content: space-between;
@@ -413,19 +287,46 @@
             border-radius: 8px;
         }
 
-        .sidebar-overlay {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 90;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
 
-        .sidebar-overlay.active {
-            display: block;
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
         }
 
         .status-badge {
@@ -460,16 +361,8 @@
                 left: 0;
             }
 
-            .menu-toggle {
-                display: block;
-            }
-
             .main-content {
                 margin-left: 0;
-            }
-
-            .content-area {
-                padding: 15px;
             }
         }
     </style>
@@ -479,75 +372,86 @@
     <!-- TELA DE LOGIN -->
     <div id="login-screen">
         <div class="login-card">
-            <div class="login-logo-container">
-                <img src="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logotipo CAIVCAM" class="login-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <span class="logo-fallback">CC</span>
-            </div>
-            <h2>CAIVCAM Admin</h2>
-            <p style="font-size: 12px; color: #666; margin-bottom: 20px;">Centro de Apoio Integrado à Vítima de Violência da Camama</p>
-            
+            <h2 style="color: var(--primary-purple); margin-bottom: 20px;">CAIVCAM Admin</h2>
             <div class="form-group">
                 <label>Utilizador</label>
-                <input type="text" id="username" placeholder="Digite seu utilizador" value="admin_caivcam">
+                <input type="text" id="username" value="admin_caivcam">
             </div>
             <div class="form-group">
                 <label>Palavra-passe</label>
                 <input type="password" id="password" placeholder="Digite sua palavra-passe">
             </div>
-            
-            <button class="btn-gold" id="login-btn" onclick="handleLogin()">Entrar no Sistema</button>
-            
-            <a href="index.html" class="btn-back-site">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Voltar para o Site Principal
-            </a>
-            
+            <button class="btn-gold" onclick="handleLogin()">Entrar no Sistema</button>
             <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">
-                Credenciais inválidas. Utilize: admin_caivcam / CaivCam2026
+                Credenciais inválidas. Use: admin_caivcam / CaivCam2026
             </p>
         </div>
     </div>
 
-    <!-- OVERLAY MOBILE -->
-    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileMenu()"></div>
+    <!-- MODAL PARA NOVO REGISTO -->
+    <div class="modal" id="newRecordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Novo Registo</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="newRecordForm" onsubmit="saveRecord(event)">
+                <div class="form-group">
+                    <label>Nome da Vítima / Beneficiário</label>
+                    <input type="text" id="recordName" required>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select id="recordCategory" required>
+                        <option value="">Selecione...</option>
+                        <option value="psicologico">Atendimento Psicológico</option>
+                        <option value="juridico">Atendimento Jurídico</option>
+                        <option value="familiar">Famílias Vulneráveis</option>
+                        <option value="criancas">Crianças Violentadas</option>
+                        <option value="alimentos">Paternidade & Alimentos</option>
+                        <option value="idosos">Abandono de Idosos</option>
+                        <option value="comunidade">Conflitos Comunitários</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Descrição do Caso</label>
+                    <textarea id="recordDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="recordStatus" required>
+                        <option value="Em Acompanhamento">Em Acompanhamento</option>
+                        <option value="Encaminhado">Encaminhado</option>
+                        <option value="Concluído">Concluído</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-gold">Salvar Registo</button>
+            </form>
+        </div>
+    </div>
 
     <!-- PAINEL PRINCIPAL -->
     <div id="app-container">
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <a href="index.html" class="sidebar-back-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                    Voltar ao Site
-                </a>
-                <div class="sidebar-logo-container">
-                    <img src="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="Logo" class="sidebar-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <span class="logo-fallback" style="font-size: 11px;">CC</span>
-                </div>
-                <h1>CAIVCAM</h1>
-                <p style="font-size: 10px; color: #d4af37;">Portal Institucional</p>
+                <h2 style="color: var(--accent-gold);">CAIVCAM</h2>
+                <p style="font-size: 12px;">Painel Administrativo</p>
             </div>
-            <ul class="sidebar-menu" id="sidebar-menu">
-                <li><a class="active" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Visão Geral & Estatísticas</a></li>
-                <li><a data-tab="psicologico" onclick="switchTab('psicologico', this)">🧠 Atendimento Psicológico</a></li>
-                <li><a data-tab="juridico" onclick="switchTab('juridico', this)">⚖️ Atendimento Jurídico</a></li>
-                <li><a data-tab="vulneraveis" onclick="switchTab('vulneraveis', this)">👨‍👩‍👧 Famílias & Jovens</a></li>
-                <li><a data-tab="criancas" onclick="switchTab('criancas', this)">👶 Crianças Violentadas</a></li>
-                <li><a data-tab="familia-abandono" onclick="switchTab('familia-abandono', this)">🤰 Paternidade & Alimentos</a></li>
-                <li><a data-tab="idosos" onclick="switchTab('idosos', this)">👴 Abandono de Idosos</a></li>
-                <li><a data-tab="comunidade" onclick="switchTab('comunidade', this)">🤝 Conflitos Comunitários</a></li>
-                <li><a data-tab="config" onclick="switchTab('config', this)">🔒 Segurança & Definições</a></li>
+            <ul class="sidebar-menu">
+                <li><a class="active" onclick="switchTab('dashboard', this)">📊 Dashboard</a></li>
+                <li><a onclick="switchTab('registos', this)">📋 Todos os Registos</a></li>
+                <li><a onclick="switchTab('psicologico', this)">🧠 Psicológico</a></li>
+                <li><a onclick="switchTab('juridico', this)">⚖️ Jurídico</a></li>
+                <li><a onclick="switchTab('config', this)">🔒 Configurações</a></li>
             </ul>
         </div>
 
         <div class="main-content">
             <div class="main-header">
-                <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-                    <h2 id="page-title" style="color: var(--primary-purple); font-size: 18px;">Visão Geral & Estatísticas</h2>
-                </div>
-                <div class="user-info">
-                    <span style="font-size: 13px; font-weight: 600;">👤 Gestor</span>
-                    <button class="btn-action" onclick="handleLogout()">Sair</button>
+                <h2 id="page-title">Dashboard</h2>
+                <div>
+                    <button class="btn-action" onclick="openNewRecordModal()">+ Novo Registo</button>
+                    <button class="btn-action btn-danger" onclick="handleLogout()">Sair</button>
                 </div>
             </div>
 
@@ -557,157 +461,147 @@
                 <div id="dashboard" class="tab-content active">
                     <div class="filter-bar">
                         <div>
-                            <label style="font-weight: bold; font-size: 13px; margin-right: 8px;">Filtrar Período:</label>
-                            <select id="time-filter" style="padding: 6px; border-radius: 4px; border: 1px solid var(--gray-border);">
-                                <option value="diario">Diário</option>
-                                <option value="semanal">Semanal</option>
-                                <option value="mensal" selected>Mensal</option>
-                                <option value="trimestral">Trimestral</option>
-                                <option value="semestral">Semestral</option>
-                                <option value="anual">Anual</option>
+                            <label>Filtrar por período:</label>
+                            <select id="timeFilter" onchange="updateDashboard()">
+                                <option value="all">Todos</option>
+                                <option value="today">Hoje</option>
+                                <option value="week">Esta Semana</option>
+                                <option value="month">Este Mês</option>
                             </select>
                         </div>
-                        <button class="btn-action" style="background-color: var(--accent-gold); color: var(--primary-purple-dark); font-weight: bold;" onclick="exportPDF()">
-                            📄 Exportar PDF
-                        </button>
-                    </div>
-
-                    <div class="card-grid">
-                        <div class="metric-card">
-                            <h3>Total de Atendimentos</h3>
-                            <div class="value">1,284</div>
-                        </div>
-                        <div class="metric-card">
-                            <h3>Casos Psicológicos</h3>
-                            <div class="value">412</div>
-                        </div>
-                        <div class="metric-card">
-                            <h3>Apoio Jurídico</h3>
-                            <div class="value">328</div>
-                        </div>
-                        <div class="metric-card">
-                            <h3>Resoluções Comunitárias</h3>
-                            <div class="value">185</div>
+                        <div>
+                            <button class="btn-action" onclick="exportData('csv')">📄 Exportar CSV</button>
+                            <button class="btn-action" onclick="exportData('json')">💾 Exportar JSON</button>
+                            <button class="btn-action btn-success" onclick="printReport()">🖨️ Imprimir</button>
                         </div>
                     </div>
 
-                    <div style="background: var(--white); padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <h3 style="margin-bottom: 12px; color: var(--primary-purple); font-size: 15px;">Distribuição Recente de Ocorrências</h3>
-                        <div class="table-responsive">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID do Caso</th>
-                                        <th>Categoria</th>
-                                        <th>Vítima / Responsável</th>
-                                        <th>Data Registo</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#CC-2026-089</td>
-                                        <td>Abandono de Idosos</td>
-                                        <td>M. Silva</td>
-                                        <td>01/09/2026</td>
-                                        <td><span class="status-badge status-active">Em Acompanhamento</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#CC-2026-088</td>
-                                        <td>Fuga à Prestação de Alimentos</td>
-                                        <td>A. Domingos</td>
-                                        <td>31/08/2026</td>
-                                        <td><span class="status-badge status-pending">Encaminhado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#CC-2026-087</td>
-                                        <td>Violência Psicológica</td>
-                                        <td>Anonimizado</td>
-                                        <td>30/08/2026</td>
-                                        <td><span class="status-badge status-completed">Concluído</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="card-grid" id="dashboardMetrics">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+
+                    <div class="table-responsive">
+                        <h3 style="padding: 15px;">Registos Recentes</h3>
+                        <table class="data-table" id="dashboardTable">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable(0)">ID</th>
+                                    <th onclick="sortTable(1)">Nome</th>
+                                    <th onclick="sortTable(2)">Categoria</th>
+                                    <th onclick="sortTable(3)">Data</th>
+                                    <th onclick="sortTable(4)">Estado</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboardTableBody">
+                                <!-- Preenchido dinamicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TODOS OS REGISTOS -->
+                <div id="registos" class="tab-content">
+                    <div class="filter-bar">
+                        <div>
+                            <input type="text" id="searchInput" placeholder="🔍 Buscar registos..." onkeyup="filterRecords()">
                         </div>
+                        <div>
+                            <select id="categoryFilter" onchange="filterRecords()">
+                                <option value="">Todas as Categorias</option>
+                                <option value="psicologico">Psicológico</option>
+                                <option value="juridico">Jurídico</option>
+                                <option value="familiar">Familiar</option>
+                                <option value="criancas">Crianças</option>
+                                <option value="alimentos">Alimentos</option>
+                                <option value="idosos">Idosos</option>
+                                <option value="comunidade">Comunidade</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="allRecordsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Descrição</th>
+                                    <th>Data</th>
+                                    <th>Estado</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allRecordsBody">
+                                <!-- Preenchido dinamicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- PSICOLÓGICO -->
                 <div id="psicologico" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Registo e Acompanhamento Psicológico</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Módulo dedicado ao histórico de sessões e evolução clínica.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Novo Registo</button>
+                    <h3>Atendimentos Psicológicos</h3>
+                    <div class="table-responsive">
+                        <table class="data-table" id="psychTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Paciente</th>
+                                    <th>Sessões</th>
+                                    <th>Última Sessão</th>
+                                    <th>Progresso</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="psychBody">
+                                <!-- Preenchido dinamicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- JURÍDICO -->
                 <div id="juridico" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Atendimento Jurídico</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Emissão de pareceres e encaminhamentos jurídicos.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Novo Processo</button>
-                    </div>
-                </div>
-
-                <!-- VULNERÁVEIS -->
-                <div id="vulneraveis" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Famílias Vulneráveis & Jovens</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Programas de reinserção social e mediação familiar.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Caso</button>
-                    </div>
-                </div>
-
-                <!-- CRIANÇAS -->
-                <div id="criancas" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Crianças Violentadas</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Proteção prioritária de menores.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Ocorrência</button>
-                    </div>
-                </div>
-
-                <!-- FAMÍLIA & ABANDONO -->
-                <div id="familia-abandono" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Paternidade, Alimentos & Grávidas</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Gestão de casos de abandono familiar.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Denúncia</button>
-                    </div>
-                </div>
-
-                <!-- IDOSOS -->
-                <div id="idosos" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Abandono de Idosos</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Apoio especializado para terceira idade.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Proteção</button>
-                    </div>
-                </div>
-
-                <!-- COMUNIDADE -->
-                <div id="comunidade" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Conflitos Comunitários</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
-                        <p style="margin-bottom: 15px;">Mediação comunitária e resolução de conflitos.</p>
-                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Mediação</button>
+                    <h3>Processos Jurídicos</h3>
+                    <div class="table-responsive">
+                        <table class="data-table" id="legalTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Tipo de Processo</th>
+                                    <th>Data Abertura</th>
+                                    <th>Estado</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="legalBody">
+                                <!-- Preenchido dinamicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- CONFIGURAÇÕES -->
                 <div id="config" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Segurança e Alteração de Credenciais</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; max-width: 400px;">
+                    <h3>Configurações do Sistema</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px; max-width: 500px;">
                         <div class="form-group">
-                            <label>Palavra-passe Atual</label>
-                            <input type="password" id="current-pass" placeholder="Digite a senha atual">
+                            <label>Backup dos Dados</label>
+                            <button class="btn-action btn-success" onclick="backupData()">💾 Fazer Backup</button>
                         </div>
                         <div class="form-group">
-                            <label>Nova Palavra-passe</label>
-                            <input type="password" id="new-pass" placeholder="Mínimo 6 caracteres">
+                            <label>Limpar Dados de Teste</label>
+                            <button class="btn-action btn-danger" onclick="clearData()">🗑️ Limpar Todos os Dados</button>
                         </div>
-                        <button class="btn-gold" onclick="updatePassword()">Atualizar Palavra-passe</button>
+                        <div class="form-group">
+                            <label>Alterar Palavra-passe</label>
+                            <input type="password" id="current-pass" placeholder="Senha atual">
+                            <input type="password" id="new-pass" placeholder="Nova senha" style="margin-top: 10px;">
+                            <button class="btn-gold" onclick="updatePassword()" style="margin-top: 10px;">Atualizar</button>
+                        </div>
                     </div>
                 </div>
 
@@ -716,121 +610,459 @@
     </div>
 
     <script>
-        // Função de login
+        // ============ DADOS E ESTADO ============
+        let records = [];
+        let nextId = 1;
+
+        // Dados iniciais de exemplo
+        const initialRecords = [
+            {
+                id: 1,
+                name: 'Maria Silva',
+                category: 'idosos',
+                categoryLabel: 'Abandono de Idosos',
+                description: 'Caso de abandono familiar na comunidade da Camama',
+                date: '2026-09-01',
+                status: 'Em Acompanhamento',
+                type: 'psicologico'
+            },
+            {
+                id: 2,
+                name: 'João Santos',
+                category: 'alimentos',
+                categoryLabel: 'Paternidade & Alimentos',
+                description: 'Fuga à prestação de alimentos',
+                date: '2026-08-31',
+                status: 'Encaminhado',
+                type: 'juridico'
+            },
+            {
+                id: 3,
+                name: 'Anônimo',
+                category: 'psicologico',
+                categoryLabel: 'Atendimento Psicológico',
+                description: 'Violência psicológica doméstica',
+                date: '2026-08-30',
+                status: 'Concluído',
+                type: 'psicologico'
+            },
+            {
+                id: 4,
+                name: 'Criança A',
+                category: 'criancas',
+                categoryLabel: 'Crianças Violentadas',
+                description: 'Caso prioritário de proteção infantil',
+                date: '2026-08-29',
+                status: 'Em Acompanhamento',
+                type: 'psicologico'
+            },
+            {
+                id: 5,
+                name: 'Família B',
+                category: 'familiar',
+                categoryLabel: 'Famílias Vulneráveis',
+                description: 'Programa de reinserção social',
+                date: '2026-08-28',
+                status: 'Em Acompanhamento',
+                type: 'social'
+            }
+        ];
+
+        // ============ FUNÇÕES DE LOGIN ============
         function handleLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const error = document.getElementById('login-error');
             
-            console.log('Tentativa de login:', username, password);
-            
-            // Credenciais corretas (para teste)
             if (username === 'admin_caivcam' && password === 'CaivCam2026') {
-                console.log('Login bem-sucedido');
-                
-                // Esconder tela de login
                 document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('app-container').classList.add('active');
                 
-                // Mostrar painel
-                const appContainer = document.getElementById('app-container');
-                appContainer.classList.add('active');
+                // Inicializar dados
+                if (records.length === 0) {
+                    records = [...initialRecords];
+                    nextId = 6;
+                }
                 
-                // Limpar campos
-                document.getElementById('password').value = '';
-                error.style.display = 'none';
+                updateDashboard();
+                updateAllTables();
                 
-                // Ativar dashboard
-                switchTab('dashboard', document.querySelector('[data-tab="dashboard"]'));
-                
-                console.log('Painel ativado');
+                console.log('✅ Login realizado com sucesso');
+                console.log('📊 Dados carregados:', records.length, 'registos');
             } else {
-                console.log('Login falhou');
-                error.style.display = 'block';
-                error.textContent = 'Credenciais inválidas. Use: admin_caivcam / CaivCam2026';
+                document.getElementById('login-error').style.display = 'block';
             }
         }
 
-        // Função de logout
         function handleLogout() {
-            console.log('Logout realizado');
-            
-            // Esconder painel
             document.getElementById('app-container').classList.remove('active');
-            
-            // Mostrar tela de login
             document.getElementById('login-screen').classList.remove('hidden');
-            
-            // Limpar campos
             document.getElementById('password').value = '';
             document.getElementById('login-error').style.display = 'none';
+            console.log('👋 Logout realizado');
         }
 
-        // Toggle menu mobile
-        function toggleMobileMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            
-            sidebar.classList.toggle('mobile-open');
-            overlay.classList.toggle('active');
-            
-            console.log('Menu mobile toggled');
-        }
-
-        function closeMobileMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            
-            sidebar.classList.remove('mobile-open');
-            overlay.classList.remove('active');
-        }
-
-        // Trocar de aba
+        // ============ FUNÇÕES DE NAVEGAÇÃO ============
         function switchTab(tabId, element) {
-            console.log('Mudando para aba:', tabId);
-            
-            // Remover classe active de todas as abas
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.remove('active');
             });
-            
-            // Remover classe active de todos os links
             document.querySelectorAll('.sidebar-menu a').forEach(el => {
                 el.classList.remove('active');
             });
             
-            // Adicionar classe active na aba selecionada
-            const selectedTab = document.getElementById(tabId);
-            if (selectedTab) {
-                selectedTab.classList.add('active');
-                console.log('Aba ativada:', tabId);
-            } else {
-                console.error('Aba não encontrada:', tabId);
-            }
-            
-            // Adicionar classe active no link clicado
+            document.getElementById(tabId).classList.add('active');
             if (element) {
                 element.classList.add('active');
                 document.getElementById('page-title').textContent = element.textContent.trim();
             }
+        }
+
+        // ============ FUNÇÕES DO DASHBOARD ============
+        function updateDashboard() {
+            const timeFilter = document.getElementById('timeFilter').value;
+            let filteredRecords = [...records];
             
-            // Fechar menu mobile se aberto
-            if (window.innerWidth <= 900) {
-                closeMobileMenu();
+            // Filtrar por período
+            const today = new Date();
+            if (timeFilter === 'today') {
+                filteredRecords = filteredRecords.filter(r => r.date === today.toISOString().split('T')[0]);
+            } else if (timeFilter === 'week') {
+                const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+                filteredRecords = filteredRecords.filter(r => new Date(r.date) >= weekAgo);
+            } else if (timeFilter === 'month') {
+                const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+                filteredRecords = filteredRecords.filter(r => new Date(r.date) >= monthAgo);
+            }
+            
+            // Atualizar métricas
+            const metrics = {
+                total: filteredRecords.length,
+                psicologico: filteredRecords.filter(r => r.type === 'psicologico').length,
+                juridico: filteredRecords.filter(r => r.type === 'juridico').length,
+                social: filteredRecords.filter(r => r.type === 'social').length,
+                ativos: filteredRecords.filter(r => r.status === 'Em Acompanhamento').length,
+                concluidos: filteredRecords.filter(r => r.status === 'Concluído').length
+            };
+            
+            document.getElementById('dashboardMetrics').innerHTML = `
+                <div class="metric-card">
+                    <h3>Total de Registos</h3>
+                    <div class="value">${metrics.total}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Atendimentos Psicológicos</h3>
+                    <div class="value">${metrics.psicologico}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Processos Jurídicos</h3>
+                    <div class="value">${metrics.juridico}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Casos Ativos</h3>
+                    <div class="value">${metrics.ativos}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Casos Concluídos</h3>
+                    <div class="value">${metrics.concluidos}</div>
+                </div>
+            `;
+            
+            // Atualizar tabela
+            const tableBody = document.getElementById('dashboardTableBody');
+            tableBody.innerHTML = '';
+            
+            filteredRecords.slice(0, 10).forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>#CC-${record.id.toString().padStart(4, '0')}</td>
+                    <td>${record.name}</td>
+                    <td>${record.categoryLabel}</td>
+                    <td>${record.date}</td>
+                    <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                        <button class="btn-action btn-danger" onclick="deleteRecord(${record.id})">Apagar</button>
+                    </td>
+                `;
+            });
+            
+            console.log('📊 Dashboard atualizado com', filteredRecords.length, 'registos');
+        }
+
+        function getStatusClass(status) {
+            if (status === 'Em Acompanhamento') return 'active';
+            if (status === 'Encaminhado') return 'pending';
+            if (status === 'Concluído') return 'completed';
+            return 'active';
+        }
+
+        // ============ FUNÇÕES DE TABELAS ============
+        function updateAllTables() {
+            updateDashboard();
+            updateAllRecordsTable();
+            updatePsychTable();
+            updateLegalTable();
+        }
+
+        function updateAllRecordsTable() {
+            const tableBody = document.getElementById('allRecordsBody');
+            tableBody.innerHTML = '';
+            
+            records.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>#CC-${record.id.toString().padStart(4, '0')}</td>
+                    <td>${record.name}</td>
+                    <td>${record.categoryLabel}</td>
+                    <td>${record.description}</td>
+                    <td>${record.date}</td>
+                    <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                        <button class="btn-action btn-danger" onclick="deleteRecord(${record.id})">Apagar</button>
+                    </td>
+                `;
+            });
+        }
+
+        function updatePsychTable() {
+            const psychRecords = records.filter(r => r.type === 'psicologico');
+            const tableBody = document.getElementById('psychBody');
+            tableBody.innerHTML = '';
+            
+            psychRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>#PS-${record.id.toString().padStart(4, '0')}</td>
+                    <td>${record.name}</td>
+                    <td>${Math.floor(Math.random() * 10) + 1} sessões</td>
+                    <td>${record.date}</td>
+                    <td>
+                        <div style="background: #e0e0e0; height: 20px; border-radius: 10px; width: 100px;">
+                            <div style="background: ${record.status === 'Concluído' ? 'green' : 'orange'}; height: 20px; border-radius: 10px; width: ${record.status === 'Concluído' ? '100%' : '50%'};"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                    </td>
+                `;
+            });
+        }
+
+        function updateLegalTable() {
+            const legalRecords = records.filter(r => r.type === 'juridico');
+            const tableBody = document.getElementById('legalBody');
+            tableBody.innerHTML = '';
+            
+            legalRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>#JR-${record.id.toString().padStart(4, '0')}</td>
+                    <td>${record.name}</td>
+                    <td>${record.categoryLabel}</td>
+                    <td>${record.date}</td>
+                    <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                    </td>
+                `;
+            });
+        }
+
+        // ============ FUNÇÕES DE CRUD ============
+        function openNewRecordModal() {
+            document.getElementById('newRecordModal').classList.add('active');
+            document.getElementById('modalTitle').textContent = 'Novo Registo';
+            document.getElementById('newRecordForm').reset();
+        }
+
+        function closeModal() {
+            document.getElementById('newRecordModal').classList.remove('active');
+        }
+
+        function saveRecord(event) {
+            event.preventDefault();
+            
+            const newRecord = {
+                id: nextId++,
+                name: document.getElementById('recordName').value,
+                category: document.getElementById('recordCategory').value,
+                categoryLabel: getCategoryLabel(document.getElementById('recordCategory').value),
+                description: document.getElementById('recordDescription').value,
+                date: new Date().toISOString().split('T')[0],
+                status: document.getElementById('recordStatus').value,
+                type: document.getElementById('recordCategory').value === 'juridico' ? 'juridico' : 
+                      document.getElementById('recordCategory').value === 'psicologico' ? 'psicologico' : 'social'
+            };
+            
+            records.unshift(newRecord);
+            updateAllTables();
+            closeModal();
+            
+            console.log('✅ Novo registo criado:', newRecord);
+            alert('✅ Registo criado com sucesso!\n\nID: #CC-' + newRecord.id.toString().padStart(4, '0'));
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                'psicologico': 'Atendimento Psicológico',
+                'juridico': 'Atendimento Jurídico',
+                'familiar': 'Famílias Vulneráveis',
+                'criancas': 'Crianças Violentadas',
+                'alimentos': 'Paternidade & Alimentos',
+                'idosos': 'Abandono de Idosos',
+                'comunidade': 'Conflitos Comunitários'
+            };
+            return labels[category] || category;
+        }
+
+        function viewRecord(id) {
+            const record = records.find(r => r.id === id);
+            if (record) {
+                alert(`📋 Detalhes do Registo\n\n` +
+                      `ID: #CC-${record.id.toString().padStart(4, '0')}\n` +
+                      `Nome: ${record.name}\n` +
+                      `Categoria: ${record.categoryLabel}\n` +
+                      `Descrição: ${record.description}\n` +
+                      `Data: ${record.date}\n` +
+                      `Estado: ${record.status}`);
             }
         }
 
-        // Exportar PDF
-        function exportPDF() {
-            console.log('Exportando PDF...');
-            alert('📄 Gerando relatório PDF do CAIVCAM...\n\nEste recurso estará disponível em breve!');
+        function deleteRecord(id) {
+            if (confirm('Tem certeza que deseja apagar este registo?')) {
+                records = records.filter(r => r.id !== id);
+                updateAllTables();
+                console.log('🗑️ Registo apagado:', id);
+            }
         }
 
-        // Atualizar palavra-passe
+        // ============ FUNÇÕES DE FILTRO E BUSCA ============
+        function filterRecords() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            
+            let filteredRecords = records.filter(record => {
+                const matchesSearch = record.name.toLowerCase().includes(searchTerm) ||
+                                     record.description.toLowerCase().includes(searchTerm) ||
+                                     record.categoryLabel.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || record.category === categoryFilter;
+                return matchesSearch && matchesCategory;
+            });
+            
+            const tableBody = document.getElementById('allRecordsBody');
+            tableBody.innerHTML = '';
+            
+            filteredRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>#CC-${record.id.toString().padStart(4, '0')}</td>
+                    <td>${record.name}</td>
+                    <td>${record.categoryLabel}</td>
+                    <td>${record.description}</td>
+                    <td>${record.date}</td>
+                    <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                        <button class="btn-action btn-danger" onclick="deleteRecord(${record.id})">Apagar</button>
+                    </td>
+                `;
+            });
+            
+            console.log('🔍 Filtro aplicado:', filteredRecords.length, 'registos encontrados');
+        }
+
+        // ============ FUNÇÕES DE EXPORTAÇÃO ============
+        function exportData(format) {
+            const exportData = records.map(r => ({
+                id: r.id,
+                nome: r.name,
+                categoria: r.categoryLabel,
+                descricao: r.description,
+                data: r.date,
+                estado: r.status
+            }));
+            
+            if (format === 'csv') {
+                exportCSV(exportData);
+            } else if (format === 'json') {
+                exportJSON(exportData);
+            }
+        }
+
+        function exportCSV(data) {
+            let csv = 'ID,Nome,Categoria,Descrição,Data,Estado\n';
+            data.forEach(r => {
+                csv += `${r.id},"${r.nome}","${r.categoria}","${r.descricao}",${r.data},"${r.estado}"\n`;
+            });
+            
+            downloadFile(csv, 'caivcam_registos.csv', 'text/csv');
+            console.log('📄 CSV exportado com', data.length, 'registos');
+        }
+
+        function exportJSON(data) {
+            const json = JSON.stringify(data, null, 2);
+            downloadFile(json, 'caivcam_registos.json', 'application/json');
+            console.log('💾 JSON exportado com', data.length, 'registos');
+        }
+
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function printReport() {
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write('<h2>Relatório CAIVCAM</h2>');
+            printWindow.document.write('<p>Data: ' + new Date().toLocaleDateString('pt-PT') + '</p>');
+            printWindow.document.write('<table border="1" cellpadding="5">');
+            printWindow.document.write('<tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
+            
+            records.forEach(r => {
+                printWindow.document.write(`<tr>`);
+                printWindow.document.write(`<td>#CC-${r.id}</td>`);
+                printWindow.document.write(`<td>${r.name}</td>`);
+                printWindow.document.write(`<td>${r.categoryLabel}</td>`);
+                printWindow.document.write(`<td>${r.date}</td>`);
+                printWindow.document.write(`<td>${r.status}</td>`);
+                printWindow.document.write(`</tr>`);
+            });
+            
+            printWindow.document.write('</table>');
+            printWindow.document.close();
+            printWindow.print();
+            
+            console.log('🖨️ Relatório enviado para impressão');
+        }
+
+        // ============ FUNÇÕES DE CONFIGURAÇÃO ============
+        function backupData() {
+            exportData('json');
+            alert('✅ Backup dos dados criado com sucesso!');
+        }
+
+        function clearData() {
+            if (confirm('⚠️ ATENÇÃO: Esta ação irá apagar TODOS os registos!\n\nTem certeza?')) {
+                if (confirm('Confirmação final: Apagar ' + records.length + ' registos?')) {
+                    records = [];
+                    nextId = 1;
+                    updateAllTables();
+                    alert('✅ Todos os dados foram apagados.');
+                    console.log('🗑️ Dados limpos');
+                }
+            }
+        }
+
         function updatePassword() {
             const currentPass = document.getElementById('current-pass').value;
             const newPass = document.getElementById('new-pass').value;
-            
-            console.log('Atualizando senha...');
             
             if (currentPass === 'CaivCam2026' && newPass.length >= 6) {
                 alert('✅ Palavra-passe alterada com sucesso!');
@@ -841,19 +1073,36 @@
             }
         }
 
-        // Inicialização
+        // ============ FUNÇÕES DE ORDENAÇÃO ============
+        function sortTable(column) {
+            const table = document.getElementById('dashboardTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                const aValue = a.cells[column].textContent;
+                const bValue = b.cells[column].textContent;
+                return aValue.localeCompare(bValue);
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+            console.log('📊 Tabela ordenada pela coluna', column);
+        }
+
+        // ============ INICIALIZAÇÃO ============
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Painel CAIVCAM carregado com sucesso!');
-            console.log('Credenciais de teste:');
-            console.log('Usuário: admin_caivcam');
-            console.log('Senha: CaivCam2026');
-            
-            // Garantir que a tela de login está visível
-            document.getElementById('login-screen').classList.remove('hidden');
-            document.getElementById('app-container').classList.remove('active');
-            
-            // Focar no campo de senha
-            document.getElementById('password').focus();
+            console.log('🚀 Painel CAIVCAM carregado com sucesso!');
+            console.log('📋 Credenciais de acesso:');
+            console.log('   Usuário: admin_caivcam');
+            console.log('   Senha: CaivCam2026');
+            console.log('');
+            console.log('💡 Funcionalidades disponíveis:');
+            console.log('   ✓ Criar, ver e apagar registos');
+            console.log('   ✓ Filtrar por período e categoria');
+            console.log('   ✓ Buscar registos');
+            console.log('   ✓ Exportar para CSV e JSON');
+            console.log('   ✓ Imprimir relatórios');
+            console.log('   ✓ Ordenar tabelas');
             
             // Permitir login com Enter
             document.getElementById('password').addEventListener('keypress', function(e) {
@@ -861,19 +1110,7 @@
                     handleLogin();
                 }
             });
-            
-            document.getElementById('username').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleLogin();
-                }
-            });
         });
-
-        // Prevenir erros de carregamento
-        window.onerror = function(msg, url, line, col, error) {
-            console.error('Erro no painel:', msg, 'Linha:', line);
-            return false;
-        };
     </script>
 </body>
 </html>
