@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /painel-do-gestor.html
+Disallow: /admin/
+
+Sitemap: https://caivcam.org.ao/sitemap.xml
