@@ -1,0 +1,29 @@
+<!-- Adicionar upload de documentos -->
+<div class="upload-area" style="border: 2px dashed #d4af37; padding: 30px; text-align: center; border-radius: 8px; margin-top: 20px;">
+    <i class="fas fa-cloud-upload-alt" style="font-size: 40px; color: #5a2d82;"></i>
+    <p style="margin: 10px 0;">Arraste e solte documentos ou</p>
+    <button class="btn-action">Selecionar Arquivos</button>
+    <input type="file" multiple style="display: none;">
+</div>
+
+<script>
+// Upload com validação
+document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+    const files = e.target.files;
+    const allowedTypes = ['pdf', 'jpg', 'png', 'doc', 'docx'];
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    
+    Array.from(files).forEach(file => {
+        const extension = file.name.split('.').pop().toLowerCase();
+        if (!allowedTypes.includes(extension)) {
+            alert(`Formato não suportado: ${file.name}`);
+            return;
+        }
+        if (file.size > maxSize) {
+            alert(`Arquivo muito grande: ${file.name}`);
+            return;
+        }
+        // Processar upload...
+    });
+});
+</script>
