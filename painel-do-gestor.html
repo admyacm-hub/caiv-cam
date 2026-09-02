@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAIVCAM - Painel de Administração Funcional</title>
+    <title>CAIVCAM - Painel de Administração 100% Funcional</title>
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/favicon.ico">
     <style>
         :root {
@@ -34,7 +34,6 @@
             overflow: hidden;
         }
 
-        /* Tela de Login */
         #login-screen {
             position: fixed;
             top: 0;
@@ -104,7 +103,6 @@
             transform: translateY(-2px);
         }
 
-        /* Layout do Painel */
         #app-container {
             display: none;
             width: 100%;
@@ -242,11 +240,6 @@
         .data-table th {
             background-color: var(--primary-purple);
             color: var(--white);
-            cursor: pointer;
-        }
-
-        .data-table th:hover {
-            background-color: var(--primary-purple-dark);
         }
 
         .btn-action {
@@ -314,21 +307,6 @@
             overflow-y: auto;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-        }
-
         .status-badge {
             padding: 4px 8px;
             border-radius: 4px;
@@ -391,10 +369,7 @@
     <!-- MODAL PARA NOVO REGISTO -->
     <div class="modal" id="newRecordModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Novo Registo</h3>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
+            <h3 style="margin-bottom: 20px;" id="modalTitle">Novo Registo</h3>
             <form id="newRecordForm" onsubmit="saveRecord(event)">
                 <div class="form-group">
                     <label>Nome da Vítima / Beneficiário</label>
@@ -425,7 +400,10 @@
                         <option value="Concluído">Concluído</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-gold">Salvar Registo</button>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn-gold" style="flex: 1;">Salvar Registo</button>
+                    <button type="button" class="btn-action btn-danger" onclick="closeModal()" style="flex: 1;">Cancelar</button>
+                </div>
             </form>
         </div>
     </div>
@@ -476,26 +454,22 @@
                         </div>
                     </div>
 
-                    <div class="card-grid" id="dashboardMetrics">
-                        <!-- Preenchido dinamicamente -->
-                    </div>
+                    <div class="card-grid" id="dashboardMetrics"></div>
 
                     <div class="table-responsive">
                         <h3 style="padding: 15px;">Registos Recentes</h3>
                         <table class="data-table" id="dashboardTable">
                             <thead>
                                 <tr>
-                                    <th onclick="sortTable(0)">ID</th>
-                                    <th onclick="sortTable(1)">Nome</th>
-                                    <th onclick="sortTable(2)">Categoria</th>
-                                    <th onclick="sortTable(3)">Data</th>
-                                    <th onclick="sortTable(4)">Estado</th>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Data</th>
+                                    <th>Estado</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="dashboardTableBody">
-                                <!-- Preenchido dinamicamente -->
-                            </tbody>
+                            <tbody id="dashboardTableBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -504,10 +478,10 @@
                 <div id="registos" class="tab-content">
                     <div class="filter-bar">
                         <div>
-                            <input type="text" id="searchInput" placeholder="🔍 Buscar registos..." onkeyup="filterRecords()">
+                            <input type="text" id="searchInput" placeholder="🔍 Buscar registos..." onkeyup="filterRecords()" style="padding: 8px; border: 1px solid var(--gray-border); border-radius: 4px;">
                         </div>
                         <div>
-                            <select id="categoryFilter" onchange="filterRecords()">
+                            <select id="categoryFilter" onchange="filterRecords()" style="padding: 8px; border: 1px solid var(--gray-border); border-radius: 4px;">
                                 <option value="">Todas as Categorias</option>
                                 <option value="psicologico">Psicológico</option>
                                 <option value="juridico">Jurídico</option>
@@ -533,60 +507,56 @@
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="allRecordsBody">
-                                <!-- Preenchido dinamicamente -->
-                            </tbody>
+                            <tbody id="allRecordsBody"></tbody>
                         </table>
                     </div>
                 </div>
 
                 <!-- PSICOLÓGICO -->
                 <div id="psicologico" class="tab-content">
-                    <h3>Atendimentos Psicológicos</h3>
+                    <h3 style="margin-bottom: 15px;">Atendimentos Psicológicos</h3>
+                    <button class="btn-action" onclick="openNewRecordModal()" style="margin-bottom: 15px;">+ Novo Atendimento Psicológico</button>
                     <div class="table-responsive">
                         <table class="data-table" id="psychTable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Paciente</th>
-                                    <th>Sessões</th>
-                                    <th>Última Sessão</th>
-                                    <th>Progresso</th>
+                                    <th>Descrição</th>
+                                    <th>Data</th>
+                                    <th>Estado</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="psychBody">
-                                <!-- Preenchido dinamicamente -->
-                            </tbody>
+                            <tbody id="psychBody"></tbody>
                         </table>
                     </div>
                 </div>
 
                 <!-- JURÍDICO -->
                 <div id="juridico" class="tab-content">
-                    <h3>Processos Jurídicos</h3>
+                    <h3 style="margin-bottom: 15px;">Processos Jurídicos</h3>
+                    <button class="btn-action" onclick="openNewRecordModal()" style="margin-bottom: 15px;">+ Novo Processo Jurídico</button>
                     <div class="table-responsive">
                         <table class="data-table" id="legalTable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Cliente</th>
-                                    <th>Tipo de Processo</th>
-                                    <th>Data Abertura</th>
+                                    <th>Descrição</th>
+                                    <th>Data</th>
                                     <th>Estado</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="legalBody">
-                                <!-- Preenchido dinamicamente -->
-                            </tbody>
+                            <tbody id="legalBody"></tbody>
                         </table>
                     </div>
                 </div>
 
                 <!-- CONFIGURAÇÕES -->
                 <div id="config" class="tab-content">
-                    <h3>Configurações do Sistema</h3>
+                    <h3 style="margin-bottom: 15px;">Configurações do Sistema</h3>
                     <div style="background: var(--white); padding: 20px; border-radius: 8px; max-width: 500px;">
                         <div class="form-group">
                             <label>Backup dos Dados</label>
@@ -598,8 +568,8 @@
                         </div>
                         <div class="form-group">
                             <label>Alterar Palavra-passe</label>
-                            <input type="password" id="current-pass" placeholder="Senha atual">
-                            <input type="password" id="new-pass" placeholder="Nova senha" style="margin-top: 10px;">
+                            <input type="password" id="current-pass" placeholder="Senha atual" style="margin-bottom: 10px;">
+                            <input type="password" id="new-pass" placeholder="Nova senha">
                             <button class="btn-gold" onclick="updatePassword()" style="margin-top: 10px;">Atualizar</button>
                         </div>
                     </div>
@@ -610,11 +580,10 @@
     </div>
 
     <script>
-        // ============ DADOS E ESTADO ============
+        // ============ DADOS ============
         let records = [];
         let nextId = 1;
 
-        // Dados iniciais de exemplo
         const initialRecords = [
             {
                 id: 1,
@@ -668,7 +637,7 @@
             }
         ];
 
-        // ============ FUNÇÕES DE LOGIN ============
+        // ============ LOGIN ============
         function handleLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -677,17 +646,12 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('app-container').classList.add('active');
                 
-                // Inicializar dados
                 if (records.length === 0) {
                     records = [...initialRecords];
                     nextId = 6;
                 }
                 
-                updateDashboard();
                 updateAllTables();
-                
-                console.log('✅ Login realizado com sucesso');
-                console.log('📊 Dados carregados:', records.length, 'registos');
             } else {
                 document.getElementById('login-error').style.display = 'block';
             }
@@ -698,10 +662,9 @@
             document.getElementById('login-screen').classList.remove('hidden');
             document.getElementById('password').value = '';
             document.getElementById('login-error').style.display = 'none';
-            console.log('👋 Logout realizado');
         }
 
-        // ============ FUNÇÕES DE NAVEGAÇÃO ============
+        // ============ NAVEGAÇÃO ============
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.remove('active');
@@ -717,12 +680,18 @@
             }
         }
 
-        // ============ FUNÇÕES DO DASHBOARD ============
+        // ============ ATUALIZAÇÃO DE TABELAS ============
+        function updateAllTables() {
+            updateDashboard();
+            updateAllRecordsTable();
+            updatePsychTable();
+            updateLegalTable();
+        }
+
         function updateDashboard() {
             const timeFilter = document.getElementById('timeFilter').value;
             let filteredRecords = [...records];
             
-            // Filtrar por período
             const today = new Date();
             if (timeFilter === 'today') {
                 filteredRecords = filteredRecords.filter(r => r.date === today.toISOString().split('T')[0]);
@@ -734,7 +703,6 @@
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= monthAgo);
             }
             
-            // Atualizar métricas
             const metrics = {
                 total: filteredRecords.length,
                 psicologico: filteredRecords.filter(r => r.type === 'psicologico').length,
@@ -767,7 +735,6 @@
                 </div>
             `;
             
-            // Atualizar tabela
             const tableBody = document.getElementById('dashboardTableBody');
             tableBody.innerHTML = '';
             
@@ -785,23 +752,6 @@
                     </td>
                 `;
             });
-            
-            console.log('📊 Dashboard atualizado com', filteredRecords.length, 'registos');
-        }
-
-        function getStatusClass(status) {
-            if (status === 'Em Acompanhamento') return 'active';
-            if (status === 'Encaminhado') return 'pending';
-            if (status === 'Concluído') return 'completed';
-            return 'active';
-        }
-
-        // ============ FUNÇÕES DE TABELAS ============
-        function updateAllTables() {
-            updateDashboard();
-            updateAllRecordsTable();
-            updatePsychTable();
-            updateLegalTable();
         }
 
         function updateAllRecordsTable() {
@@ -835,15 +785,12 @@
                 row.innerHTML = `
                     <td>#PS-${record.id.toString().padStart(4, '0')}</td>
                     <td>${record.name}</td>
-                    <td>${Math.floor(Math.random() * 10) + 1} sessões</td>
+                    <td>${record.description}</td>
                     <td>${record.date}</td>
-                    <td>
-                        <div style="background: #e0e0e0; height: 20px; border-radius: 10px; width: 100px;">
-                            <div style="background: ${record.status === 'Concluído' ? 'green' : 'orange'}; height: 20px; border-radius: 10px; width: ${record.status === 'Concluído' ? '100%' : '50%'};"></div>
-                        </div>
-                    </td>
+                    <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
                     <td>
                         <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                        <button class="btn-action btn-danger" onclick="deleteRecord(${record.id})">Apagar</button>
                     </td>
                 `;
             });
@@ -859,20 +806,27 @@
                 row.innerHTML = `
                     <td>#JR-${record.id.toString().padStart(4, '0')}</td>
                     <td>${record.name}</td>
-                    <td>${record.categoryLabel}</td>
+                    <td>${record.description}</td>
                     <td>${record.date}</td>
                     <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
                     <td>
                         <button class="btn-action" onclick="viewRecord(${record.id})">Ver</button>
+                        <button class="btn-action btn-danger" onclick="deleteRecord(${record.id})">Apagar</button>
                     </td>
                 `;
             });
         }
 
-        // ============ FUNÇÕES DE CRUD ============
+        function getStatusClass(status) {
+            if (status === 'Em Acompanhamento') return 'active';
+            if (status === 'Encaminhado') return 'pending';
+            if (status === 'Concluído') return 'completed';
+            return 'active';
+        }
+
+        // ============ CRUD ============
         function openNewRecordModal() {
             document.getElementById('newRecordModal').classList.add('active');
-            document.getElementById('modalTitle').textContent = 'Novo Registo';
             document.getElementById('newRecordForm').reset();
         }
 
@@ -883,24 +837,22 @@
         function saveRecord(event) {
             event.preventDefault();
             
+            const category = document.getElementById('recordCategory').value;
             const newRecord = {
                 id: nextId++,
                 name: document.getElementById('recordName').value,
-                category: document.getElementById('recordCategory').value,
-                categoryLabel: getCategoryLabel(document.getElementById('recordCategory').value),
+                category: category,
+                categoryLabel: getCategoryLabel(category),
                 description: document.getElementById('recordDescription').value,
                 date: new Date().toISOString().split('T')[0],
                 status: document.getElementById('recordStatus').value,
-                type: document.getElementById('recordCategory').value === 'juridico' ? 'juridico' : 
-                      document.getElementById('recordCategory').value === 'psicologico' ? 'psicologico' : 'social'
+                type: category === 'juridico' ? 'juridico' : category === 'psicologico' ? 'psicologico' : 'social'
             };
             
             records.unshift(newRecord);
             updateAllTables();
             closeModal();
-            
-            console.log('✅ Novo registo criado:', newRecord);
-            alert('✅ Registo criado com sucesso!\n\nID: #CC-' + newRecord.id.toString().padStart(4, '0'));
+            alert('✅ Registo criado com sucesso!\n\nID: #CC-' + newRecord.id.toString().padStart(4, '0') + '\nNome: ' + newRecord.name + '\nCategoria: ' + newRecord.categoryLabel);
         }
 
         function getCategoryLabel(category) {
@@ -919,13 +871,13 @@
         function viewRecord(id) {
             const record = records.find(r => r.id === id);
             if (record) {
-                alert(`📋 Detalhes do Registo\n\n` +
-                      `ID: #CC-${record.id.toString().padStart(4, '0')}\n` +
-                      `Nome: ${record.name}\n` +
-                      `Categoria: ${record.categoryLabel}\n` +
-                      `Descrição: ${record.description}\n` +
-                      `Data: ${record.date}\n` +
-                      `Estado: ${record.status}`);
+                alert('📋 Detalhes do Registo\n\n' +
+                      'ID: #CC-' + record.id.toString().padStart(4, '0') + '\n' +
+                      'Nome: ' + record.name + '\n' +
+                      'Categoria: ' + record.categoryLabel + '\n' +
+                      'Descrição: ' + record.description + '\n' +
+                      'Data: ' + record.date + '\n' +
+                      'Estado: ' + record.status);
             }
         }
 
@@ -933,16 +885,15 @@
             if (confirm('Tem certeza que deseja apagar este registo?')) {
                 records = records.filter(r => r.id !== id);
                 updateAllTables();
-                console.log('🗑️ Registo apagado:', id);
             }
         }
 
-        // ============ FUNÇÕES DE FILTRO E BUSCA ============
+        // ============ FILTROS ============
         function filterRecords() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
             
-            let filteredRecords = records.filter(record => {
+            const filteredRecords = records.filter(record => {
                 const matchesSearch = record.name.toLowerCase().includes(searchTerm) ||
                                      record.description.toLowerCase().includes(searchTerm) ||
                                      record.categoryLabel.toLowerCase().includes(searchTerm);
@@ -968,13 +919,11 @@
                     </td>
                 `;
             });
-            
-            console.log('🔍 Filtro aplicado:', filteredRecords.length, 'registos encontrados');
         }
 
-        // ============ FUNÇÕES DE EXPORTAÇÃO ============
+        // ============ EXPORTAÇÃO ============
         function exportData(format) {
-            const exportData = records.map(r => ({
+            const data = records.map(r => ({
                 id: r.id,
                 nome: r.name,
                 categoria: r.categoryLabel,
@@ -984,26 +933,14 @@
             }));
             
             if (format === 'csv') {
-                exportCSV(exportData);
+                let csv = 'ID;Nome;Categoria;Descrição;Data;Estado\n';
+                data.forEach(r => {
+                    csv += `${r.id};"${r.nome}";"${r.categoria}";"${r.descricao}";${r.data};"${r.estado}"\n`;
+                });
+                downloadFile(csv, 'caivcam_registos.csv', 'text/csv;charset=utf-8');
             } else if (format === 'json') {
-                exportJSON(exportData);
+                downloadFile(JSON.stringify(data, null, 2), 'caivcam_registos.json', 'application/json');
             }
-        }
-
-        function exportCSV(data) {
-            let csv = 'ID,Nome,Categoria,Descrição,Data,Estado\n';
-            data.forEach(r => {
-                csv += `${r.id},"${r.nome}","${r.categoria}","${r.descricao}",${r.data},"${r.estado}"\n`;
-            });
-            
-            downloadFile(csv, 'caivcam_registos.csv', 'text/csv');
-            console.log('📄 CSV exportado com', data.length, 'registos');
-        }
-
-        function exportJSON(data) {
-            const json = JSON.stringify(data, null, 2);
-            downloadFile(json, 'caivcam_registos.json', 'application/json');
-            console.log('💾 JSON exportado com', data.length, 'registos');
         }
 
         function downloadFile(content, filename, type) {
@@ -1022,8 +959,8 @@
             const printWindow = window.open('', '_blank');
             printWindow.document.write('<h2>Relatório CAIVCAM</h2>');
             printWindow.document.write('<p>Data: ' + new Date().toLocaleDateString('pt-PT') + '</p>');
-            printWindow.document.write('<table border="1" cellpadding="5">');
-            printWindow.document.write('<tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
+            printWindow.document.write('<table border="1" cellpadding="5" style="width:100%; border-collapse: collapse;">');
+            printWindow.document.write('<tr style="background:#5a2d82; color:white;"><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
             
             records.forEach(r => {
                 printWindow.document.write(`<tr>`);
@@ -1038,11 +975,9 @@
             printWindow.document.write('</table>');
             printWindow.document.close();
             printWindow.print();
-            
-            console.log('🖨️ Relatório enviado para impressão');
         }
 
-        // ============ FUNÇÕES DE CONFIGURAÇÃO ============
+        // ============ CONFIGURAÇÕES ============
         function backupData() {
             exportData('json');
             alert('✅ Backup dos dados criado com sucesso!');
@@ -1055,7 +990,6 @@
                     nextId = 1;
                     updateAllTables();
                     alert('✅ Todos os dados foram apagados.');
-                    console.log('🗑️ Dados limpos');
                 }
             }
         }
@@ -1073,41 +1007,18 @@
             }
         }
 
-        // ============ FUNÇÕES DE ORDENAÇÃO ============
-        function sortTable(column) {
-            const table = document.getElementById('dashboardTable');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            
-            rows.sort((a, b) => {
-                const aValue = a.cells[column].textContent;
-                const bValue = b.cells[column].textContent;
-                return aValue.localeCompare(bValue);
-            });
-            
-            rows.forEach(row => tbody.appendChild(row));
-            console.log('📊 Tabela ordenada pela coluna', column);
-        }
-
         // ============ INICIALIZAÇÃO ============
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Painel CAIVCAM carregado com sucesso!');
-            console.log('📋 Credenciais de acesso:');
-            console.log('   Usuário: admin_caivcam');
-            console.log('   Senha: CaivCam2026');
-            console.log('');
-            console.log('💡 Funcionalidades disponíveis:');
-            console.log('   ✓ Criar, ver e apagar registos');
-            console.log('   ✓ Filtrar por período e categoria');
-            console.log('   ✓ Buscar registos');
-            console.log('   ✓ Exportar para CSV e JSON');
-            console.log('   ✓ Imprimir relatórios');
-            console.log('   ✓ Ordenar tabelas');
-            
-            // Permitir login com Enter
             document.getElementById('password').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     handleLogin();
+                }
+            });
+            
+            // Fechar modal ao clicar fora
+            document.getElementById('newRecordModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
                 }
             });
         });
