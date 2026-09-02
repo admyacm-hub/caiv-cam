@@ -26,10 +26,10 @@
         body {
             background-color: var(--bg-light);
             color: var(--text-dark);
-            display: flex;
+            margin: 0;
+            padding: 0;
             height: 100vh;
             overflow: hidden;
-            margin: 0;
         }
 
         /* Tela de Login */
@@ -45,6 +45,10 @@
             align-items: center;
             z-index: 1000;
             padding: 20px;
+        }
+
+        #login-screen.hidden {
+            display: none !important;
         }
 
         .login-card {
@@ -121,12 +125,13 @@
             font-weight: bold;
             font-size: 14px;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.3s;
             margin-top: 5px;
         }
 
         .btn-gold:hover {
-            opacity: 0.9;
+            background-color: #c9a84c;
+            transform: translateY(-2px);
         }
 
         .btn-back-site {
@@ -146,48 +151,36 @@
             cursor: pointer;
             text-decoration: none;
             transition: all 0.25s ease;
-            box-shadow: 0 2px 5px rgba(212, 175, 55, 0.1);
-        }
-
-        .btn-back-site svg {
-            stroke: var(--accent-gold);
-            transition: transform 0.2s ease;
         }
 
         .btn-back-site:hover {
             background: var(--primary-purple);
             color: var(--white);
-            border-color: var(--primary-purple);
-            box-shadow: 0 4px 10px rgba(90, 45, 130, 0.25);
-        }
-
-        .btn-back-site:hover svg {
-            stroke: var(--accent-gold);
-            transform: translateX(-3px);
         }
 
         /* Layout do Painel */
         #app-container {
-            display: none; /* Inicialmente oculto */
+            display: none;
             width: 100%;
             height: 100vh;
-            position: relative;
         }
 
-        #app-container.visible {
-            display: flex; /* Mostrar quando logado */
+        #app-container.active {
+            display: flex !important;
         }
 
-        sidebar {
+        .sidebar {
             width: 260px;
             background-color: var(--primary-purple);
             color: var(--white);
             display: flex;
             flex-direction: column;
             border-right: 3px solid var(--accent-gold);
-            transition: transform 0.3s ease;
-            z-index: 100;
             min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
         }
 
         .sidebar-header {
@@ -216,8 +209,6 @@
         .sidebar-back-btn:hover {
             background: var(--accent-gold);
             color: var(--primary-purple-dark);
-            border-color: var(--accent-gold);
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
         .sidebar-logo-container {
@@ -251,30 +242,40 @@
             overflow-y: auto;
         }
 
+        .sidebar-menu li {
+            margin: 0;
+        }
+
         .sidebar-menu li a {
             display: block;
             padding: 12px 20px;
             color: var(--white);
             text-decoration: none;
             font-size: 13px;
-            transition: background 0.2s, border-left 0.2s;
+            transition: all 0.3s;
             cursor: pointer;
+            border-left: 4px solid transparent;
         }
 
-        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+        .sidebar-menu li a:hover {
             background-color: rgba(255,255,255,0.1);
             border-left: 4px solid var(--accent-gold);
         }
 
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            width: calc(100% - 260px);
+        .sidebar-menu li a.active {
+            background-color: rgba(255,255,255,0.15);
+            border-left: 4px solid var(--accent-gold);
         }
 
-        header {
+        .main-content {
+            flex-grow: 1;
+            margin-left: 260px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .main-header {
             background-color: var(--white);
             padding: 12px 20px;
             display: flex;
@@ -282,6 +283,9 @@
             align-items: center;
             border-bottom: 1px solid var(--gray-border);
             min-height: 60px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
         .header-left {
@@ -309,7 +313,6 @@
             padding: 20px;
             overflow-y: auto;
             flex-grow: 1;
-            background-color: var(--bg-light);
         }
 
         .tab-content {
@@ -333,6 +336,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             border-left: 4px solid var(--accent-gold);
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .metric-card h3 {
@@ -384,11 +393,12 @@
             font-size: 12px;
             font-weight: 600;
             white-space: nowrap;
-            transition: opacity 0.2s;
+            transition: all 0.3s;
         }
 
         .btn-action:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         .filter-bar {
@@ -414,36 +424,52 @@
             z-index: 90;
         }
 
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
         @media (max-width: 900px) {
-            sidebar {
-                position: fixed;
-                height: 100%;
+            .sidebar {
                 left: -260px;
-                top: 0;
+                transition: left 0.3s ease;
             }
 
-            sidebar.mobile-open {
+            .sidebar.mobile-open {
                 left: 0;
-            }
-
-            .sidebar-overlay.active {
-                display: block;
             }
 
             .menu-toggle {
                 display: block;
             }
 
+            .main-content {
+                margin-left: 0;
+            }
+
             .content-area {
                 padding: 15px;
-            }
-
-            main {
-                width: 100%;
-            }
-
-            header h2 {
-                font-size: 17px !important;
             }
         }
     </style>
@@ -466,29 +492,29 @@
             </div>
             <div class="form-group">
                 <label>Palavra-passe</label>
-                <input type="password" id="password" placeholder="Digite sua palavra-passe" value="">
+                <input type="password" id="password" placeholder="Digite sua palavra-passe">
             </div>
             
-            <button class="btn-gold" onclick="handleLogin()">Entrar no Sistema</button>
+            <button class="btn-gold" id="login-btn" onclick="handleLogin()">Entrar no Sistema</button>
             
-            <!-- Botão de Voltar para o Site Principal -->
             <a href="index.html" class="btn-back-site">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                 Voltar para o Site Principal
             </a>
             
-            <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">Palavra-passe incorreta. Utilize: CaivCam2026</p>
+            <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">
+                Credenciais inválidas. Utilize: admin_caivcam / CaivCam2026
+            </p>
         </div>
     </div>
 
     <!-- OVERLAY MOBILE -->
-    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileMenu()"></div>
 
     <!-- PAINEL PRINCIPAL -->
     <div id="app-container">
-        <sidebar id="app-sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <!-- Botão de Voltar na Sidebar -->
                 <a href="index.html" class="sidebar-back-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                     Voltar ao Site
@@ -500,34 +526,34 @@
                 <h1>CAIVCAM</h1>
                 <p style="font-size: 10px; color: #d4af37;">Portal Institucional</p>
             </div>
-            <ul class="sidebar-menu">
-                <li><a href="#" onclick="switchTab('dashboard', event)" class="active">Visão Geral & Estatísticas</a></li>
-                <li><a href="#" onclick="switchTab('psicologico', event)">Atendimento Psicológico</a></li>
-                <li><a href="#" onclick="switchTab('juridico', event)">Atendimento Jurídico</a></li>
-                <li><a href="#" onclick="switchTab('vulneraveis', event)">Famílias & Jovens (Lei)</a></li>
-                <li><a href="#" onclick="switchTab('criancas', event)">Crianças Violentadas</a></li>
-                <li><a href="#" onclick="switchTab('familia-abandono', event)">Paternidade, Alimentos & Grávidas</a></li>
-                <li><a href="#" onclick="switchTab('idosos', event)">Abandono de Idosos</a></li>
-                <li><a href="#" onclick="switchTab('comunidade', event)">Conflitos Comunitários</a></li>
-                <li><a href="#" onclick="switchTab('config', event)">Segurança & Definições</a></li>
+            <ul class="sidebar-menu" id="sidebar-menu">
+                <li><a class="active" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Visão Geral & Estatísticas</a></li>
+                <li><a data-tab="psicologico" onclick="switchTab('psicologico', this)">🧠 Atendimento Psicológico</a></li>
+                <li><a data-tab="juridico" onclick="switchTab('juridico', this)">⚖️ Atendimento Jurídico</a></li>
+                <li><a data-tab="vulneraveis" onclick="switchTab('vulneraveis', this)">👨‍👩‍👧 Famílias & Jovens</a></li>
+                <li><a data-tab="criancas" onclick="switchTab('criancas', this)">👶 Crianças Violentadas</a></li>
+                <li><a data-tab="familia-abandono" onclick="switchTab('familia-abandono', this)">🤰 Paternidade & Alimentos</a></li>
+                <li><a data-tab="idosos" onclick="switchTab('idosos', this)">👴 Abandono de Idosos</a></li>
+                <li><a data-tab="comunidade" onclick="switchTab('comunidade', this)">🤝 Conflitos Comunitários</a></li>
+                <li><a data-tab="config" onclick="switchTab('config', this)">🔒 Segurança & Definições</a></li>
             </ul>
-        </sidebar>
+        </div>
 
-        <main>
-            <header>
+        <div class="main-content">
+            <div class="main-header">
                 <div class="header-left">
                     <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
                     <h2 id="page-title" style="color: var(--primary-purple); font-size: 18px;">Visão Geral & Estatísticas</h2>
                 </div>
                 <div class="user-info">
-                    <span style="font-size: 13px; font-weight: 600; display: inline-block;">Gestor</span>
+                    <span style="font-size: 13px; font-weight: 600;">👤 Gestor</span>
                     <button class="btn-action" onclick="handleLogout()">Sair</button>
                 </div>
-            </header>
+            </div>
 
             <div class="content-area">
                 
-                <!-- DASHBOARD / ESTATÍSTICAS -->
+                <!-- DASHBOARD -->
                 <div id="dashboard" class="tab-content active">
                     <div class="filter-bar">
                         <div>
@@ -541,7 +567,9 @@
                                 <option value="anual">Anual</option>
                             </select>
                         </div>
-                        <button class="btn-action" style="background-color: var(--accent-gold); color: var(--primary-purple-dark); font-weight: bold;" onclick="exportPDF()">Exportar PDF</button>
+                        <button class="btn-action" style="background-color: var(--accent-gold); color: var(--primary-purple-dark); font-weight: bold;" onclick="exportPDF()">
+                            📄 Exportar PDF
+                        </button>
                     </div>
 
                     <div class="card-grid">
@@ -582,21 +610,21 @@
                                         <td>Abandono de Idosos</td>
                                         <td>M. Silva</td>
                                         <td>01/09/2026</td>
-                                        <td>Em Acompanhamento</td>
+                                        <td><span class="status-badge status-active">Em Acompanhamento</span></td>
                                     </tr>
                                     <tr>
                                         <td>#CC-2026-088</td>
                                         <td>Fuga à Prestação de Alimentos</td>
                                         <td>A. Domingos</td>
                                         <td>31/08/2026</td>
-                                        <td>Encaminhado Jurídico</td>
+                                        <td><span class="status-badge status-pending">Encaminhado</span></td>
                                     </tr>
                                     <tr>
                                         <td>#CC-2026-087</td>
-                                        <td>Violência Psicológica / Doméstica</td>
+                                        <td>Violência Psicológica</td>
                                         <td>Anonimizado</td>
                                         <td>30/08/2026</td>
-                                        <td>Concluído</td>
+                                        <td><span class="status-badge status-completed">Concluído</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -607,84 +635,84 @@
                 <!-- PSICOLÓGICO -->
                 <div id="psicologico" class="tab-content">
                     <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Registo e Acompanhamento Psicológico</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Módulo dedicado ao histórico de sessões, evolução clínica e notas de atendimento psicológico confidencial.</p>
-                        <button class="btn-action">+ Novo Registo Psicológico</button>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Módulo dedicado ao histórico de sessões e evolução clínica.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Novo Registo</button>
                     </div>
                 </div>
 
                 <!-- JURÍDICO -->
                 <div id="juridico" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Atendimento Jurídico e Encaminhamentos</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Emissão de pareceres jurídicos, notificações formais e submissão aos órgãos competentes.</p>
-                        <button class="btn-action">+ Novo Processo Jurídico</button>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Atendimento Jurídico</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Emissão de pareceres e encaminhamentos jurídicos.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Novo Processo</button>
                     </div>
                 </div>
 
-                <!-- VULNERÁVEIS & JOVENS -->
+                <!-- VULNERÁVEIS -->
                 <div id="vulneraveis" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Famílias Vulneráveis & Jovens em Conflito com a Lei</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Programas de reinserção social, mediação familiar e acompanhamento de menores.</p>
-                        <button class="btn-action">+ Registar Caso</button>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Famílias Vulneráveis & Jovens</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Programas de reinserção social e mediação familiar.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Caso</button>
                     </div>
                 </div>
 
-                <!-- CRIANÇAS VIOLENTADAS -->
+                <!-- CRIANÇAS -->
                 <div id="criancas" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Registo de Crianças Violentadas</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Proteção prioritária de menores, intervenção urgente e salvaguarda institucional.</p>
-                        <button class="btn-action">+ Registar Ocorrência de Menor</button>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Crianças Violentadas</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Proteção prioritária de menores.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Ocorrência</button>
                     </div>
                 </div>
 
                 <!-- FAMÍLIA & ABANDONO -->
                 <div id="familia-abandono" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Paternidade, Alimentos & Mulher Grávida</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Gestão de casos de fuga à paternidade/maternidade, prestação de alimentos e abandono de mulher grávida.</p>
-                        <button class="btn-action">+ Registar Denúncia Familiar</button>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Paternidade, Alimentos & Grávidas</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Gestão de casos de abandono familiar.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Denúncia</button>
                     </div>
                 </div>
 
                 <!-- IDOSOS -->
                 <div id="idosos" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Casos de Abandono de Idosos</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Apoio e acolhimento especializado para proteção da terceira idade na comunidade da Camama.</p>
-                        <button class="btn-action">+ Registar Proteção de Idoso</button>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Abandono de Idosos</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Apoio especializado para terceira idade.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Proteção</button>
                     </div>
                 </div>
 
                 <!-- COMUNIDADE -->
                 <div id="comunidade" class="tab-content">
-                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Resolução de Conflitos ao Nível das Comunidades</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <p style="margin-bottom: 15px; font-size: 14px;">Mediação comunitária e resolução pacífica de disputas locais sob supervisão do CAIVCAM.</p>
-                        <button class="btn-action">+ Registar Mediação</button>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Conflitos Comunitários</h3>
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px;">
+                        <p style="margin-bottom: 15px;">Mediação comunitária e resolução de conflitos.</p>
+                        <button class="btn-action" onclick="alert('Funcionalidade em desenvolvimento')">+ Registar Mediação</button>
                     </div>
                 </div>
 
-                <!-- CONFIGURAÇÕES / SEGURANÇA -->
+                <!-- CONFIGURAÇÕES -->
                 <div id="config" class="tab-content">
                     <h3 style="color: var(--primary-purple); margin-bottom: 15px;">Segurança e Alteração de Credenciais</h3>
-                    <div style="background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); max-width: 400px;">
+                    <div style="background: var(--white); padding: 20px; border-radius: 8px; max-width: 400px;">
                         <div class="form-group">
                             <label>Palavra-passe Atual</label>
-                            <input type="password" id="current-pass" placeholder="••••••••">
+                            <input type="password" id="current-pass" placeholder="Digite a senha atual">
                         </div>
                         <div class="form-group">
                             <label>Nova Palavra-passe</label>
-                            <input type="password" id="new-pass" placeholder="Mínimo 8 caracteres">
+                            <input type="password" id="new-pass" placeholder="Mínimo 6 caracteres">
                         </div>
                         <button class="btn-gold" onclick="updatePassword()">Atualizar Palavra-passe</button>
                     </div>
                 </div>
 
             </div>
-        </main>
+        </div>
     </div>
 
     <script>
@@ -694,51 +722,72 @@
             const password = document.getElementById('password').value;
             const error = document.getElementById('login-error');
             
-            console.log('Tentativa de login:', username);
+            console.log('Tentativa de login:', username, password);
             
-            // Credenciais corretas
+            // Credenciais corretas (para teste)
             if (username === 'admin_caivcam' && password === 'CaivCam2026') {
                 console.log('Login bem-sucedido');
                 
                 // Esconder tela de login
-                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('login-screen').classList.add('hidden');
                 
                 // Mostrar painel
                 const appContainer = document.getElementById('app-container');
-                appContainer.style.display = 'flex';
-                appContainer.classList.add('visible');
+                appContainer.classList.add('active');
                 
-                // Limpar campo de senha
+                // Limpar campos
                 document.getElementById('password').value = '';
                 error.style.display = 'none';
                 
-                // Inicializar dashboard
-                switchTab('dashboard', { target: document.querySelector('.sidebar-menu a') });
+                // Ativar dashboard
+                switchTab('dashboard', document.querySelector('[data-tab="dashboard"]'));
+                
+                console.log('Painel ativado');
             } else {
                 console.log('Login falhou');
                 error.style.display = 'block';
+                error.textContent = 'Credenciais inválidas. Use: admin_caivcam / CaivCam2026';
             }
         }
 
         // Função de logout
         function handleLogout() {
-            document.getElementById('app-container').style.display = 'none';
-            document.getElementById('app-container').classList.remove('visible');
-            document.getElementById('login-screen').style.display = 'flex';
+            console.log('Logout realizado');
+            
+            // Esconder painel
+            document.getElementById('app-container').classList.remove('active');
+            
+            // Mostrar tela de login
+            document.getElementById('login-screen').classList.remove('hidden');
+            
+            // Limpar campos
             document.getElementById('password').value = '';
             document.getElementById('login-error').style.display = 'none';
         }
 
         // Toggle menu mobile
         function toggleMobileMenu() {
-            const sidebar = document.getElementById('app-sidebar');
+            const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
+            
             sidebar.classList.toggle('mobile-open');
             overlay.classList.toggle('active');
+            
+            console.log('Menu mobile toggled');
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
         }
 
         // Trocar de aba
-        function switchTab(tabId, event) {
+        function switchTab(tabId, element) {
+            console.log('Mudando para aba:', tabId);
+            
             // Remover classe active de todas as abas
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.remove('active');
@@ -753,23 +802,27 @@
             const selectedTab = document.getElementById(tabId);
             if (selectedTab) {
                 selectedTab.classList.add('active');
+                console.log('Aba ativada:', tabId);
+            } else {
+                console.error('Aba não encontrada:', tabId);
             }
             
             // Adicionar classe active no link clicado
-            if (event && event.target) {
-                event.target.classList.add('active');
-                document.getElementById('page-title').innerText = event.target.innerText;
+            if (element) {
+                element.classList.add('active');
+                document.getElementById('page-title').textContent = element.textContent.trim();
             }
             
             // Fechar menu mobile se aberto
             if (window.innerWidth <= 900) {
-                toggleMobileMenu();
+                closeMobileMenu();
             }
         }
 
         // Exportar PDF
         function exportPDF() {
-            alert('Gerando e exportando relatório estatístico do CAIVCAM em formato PDF...');
+            console.log('Exportando PDF...');
+            alert('📄 Gerando relatório PDF do CAIVCAM...\n\nEste recurso estará disponível em breve!');
         }
 
         // Atualizar palavra-passe
@@ -777,22 +830,27 @@
             const currentPass = document.getElementById('current-pass').value;
             const newPass = document.getElementById('new-pass').value;
             
-            if(currentPass === 'CaivCam2026' && newPass.length >= 6) {
-                alert('Palavra-passe alterada com sucesso!');
+            console.log('Atualizando senha...');
+            
+            if (currentPass === 'CaivCam2026' && newPass.length >= 6) {
+                alert('✅ Palavra-passe alterada com sucesso!');
                 document.getElementById('current-pass').value = '';
                 document.getElementById('new-pass').value = '';
             } else {
-                alert('Verifique a palavra-passe atual (CaivCam2026) e certifique-se de que a nova possui pelo menos 6 caracteres.');
+                alert('❌ Verifique a palavra-passe atual (CaivCam2026) e certifique-se de que a nova possui pelo menos 6 caracteres.');
             }
         }
 
-        // Inicialização quando a página carrega
+        // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Painel CAIVCAM carregado');
+            console.log('Painel CAIVCAM carregado com sucesso!');
+            console.log('Credenciais de teste:');
+            console.log('Usuário: admin_caivcam');
+            console.log('Senha: CaivCam2026');
             
             // Garantir que a tela de login está visível
-            document.getElementById('login-screen').style.display = 'flex';
-            document.getElementById('app-container').style.display = 'none';
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('app-container').classList.remove('active');
             
             // Focar no campo de senha
             document.getElementById('password').focus();
@@ -803,12 +861,19 @@
                     handleLogin();
                 }
             });
+            
+            document.getElementById('username').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
         });
 
-        // Prevenir envio do formulário
-        document.addEventListener('submit', function(e) {
-            e.preventDefault();
-        });
+        // Prevenir erros de carregamento
+        window.onerror = function(msg, url, line, col, error) {
+            console.error('Erro no painel:', msg, 'Linha:', line);
+            return false;
+        };
     </script>
 </body>
 </html>
