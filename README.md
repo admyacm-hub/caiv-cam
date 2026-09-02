@@ -1,44 +1,61 @@
 # CAIVCAM - Centro de Apoio Integrado à Vítima de Violência da Camama
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Deploy Status](https://img.shields.io/badge/deploy-production-green)](https://caivcam.org.ao)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/caivcam/deploys)
 
 ## 📋 Sobre o Projeto
 
-Site oficial do CAIVCAM, centro especializado no apoio a vítimas de violência doméstica em Luanda, Angola.
+Site oficial do CAIVCAM, centro especializado no apoio a vítimas de violência doméstica em Luanda, Angola. O projeto inclui:
 
-### 🎯 Missão
-"Acolher, Proteger, Orientar e Empoderar"
+- 🌐 Site público informativo
+- 🔐 Painel administrativo seguro
+- 📱 Design responsivo e acessível
+- 🚨 Botão de emergência e denúncia segura
+- 📊 Dashboard com estatísticas
+
+## 🎯 Missão
+
+**"Acolher, Proteger, Orientar e Empoderar"**
 
 ## 🚀 Funcionalidades
 
+### Site Público
+- ✅ Informações sobre serviços
+- ✅ Tipos de violência doméstica (Lei 25/11)
 - ✅ Formulário de denúncia confidencial
-- ✅ Botão de saída rápida para segurança
-- ✅ Acessibilidade (alto contraste, leitor de tela)
-- ✅ Design responsivo
+- ✅ Botão de saída rápida
+- ✅ Acessibilidade (alto contraste)
 - ✅ Modo escuro
-- ✅ Otimização SEO
-- ✅ PWA (aplicativo progressivo)
+- ✅ PWA (instalável)
+
+### Painel Administrativo
+- 🔐 Login seguro
+- 📊 Dashboard com métricas
+- 📈 Gráficos interativos
+- 📋 Gestão de casos
+- 📁 Upload de documentos
+- 📤 Exportação de dados
+- 🔍 Busca avançada
 
 ## 🛠️ Tecnologias
 
-- HTML5, CSS3, JavaScript
-- PHP (backend)
-- MySQL (banco de dados)
-- Font Awesome (ícones)
-- Google Fonts (tipografia)
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Gráficos:** Chart.js
+- **Ícones:** Font Awesome
+- **Fontes:** Google Fonts
+- **Deploy:** Netlify/GitHub Pages
 
 ## 📦 Instalação
 
 ```bash
 # Clone o repositório
-git clone https://github.com/sua-org/caivcam-website.git
+git clone https://github.com/admyacm-hub/caivcam.git
 
 # Entre no diretório
-cd caivcam-website
+cd caivcam
 
-# Instale as dependências (se usar npm)
-npm install
+# Para desenvolvimento local
+npx serve public/
 
-# Configure as variáveis de ambiente
-cp .env.example .env
+# Ou com live-server
+npx live-server public/
