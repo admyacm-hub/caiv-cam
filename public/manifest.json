@@ -1,0 +1,28 @@
+{
+  "name": "CAIVCAM - Centro de Apoio à Vítima de Violência",
+  "short_name": "CAIVCAM",
+  "description": "Centro de Apoio Integrado à Vítima de Violência da Camama",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#5a2d82",
+  "theme_color": "#5a2d82",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "pt",
+  "dir": "ltr",
+  "categories": ["social", "health", "government"],
+  "prefer_related_applications": false
+}
