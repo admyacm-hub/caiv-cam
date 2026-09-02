@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAIVCAM - Painel de Administração Completo</title>
     
-    <!-- Favicon múltiplo para compatibilidade -->
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg">
     <link rel="shortcut icon" type="image/jpeg" href="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg">
     
-    <!-- Font Awesome para ícones -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Chart.js para gráficos -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
@@ -106,6 +106,7 @@
             border-radius: 50%;
             border: 3px solid var(--accent-gold);
             box-shadow: 0 5px 15px rgba(90, 45, 130, 0.3);
+            overflow: hidden;
         }
 
         .login-logo img {
@@ -178,6 +179,10 @@
             margin-top: 5px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-gold:hover {
@@ -185,8 +190,40 @@
             box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
 
-        .btn-gold:active {
-            transform: translateY(0);
+        /* Botão de voltar ao site - LOGIN */
+        .btn-back-site {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid var(--primary-purple);
+            color: var(--primary-purple);
+            padding: 13px 16px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-back-site i {
+            font-size: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-back-site:hover {
+            background: var(--primary-purple);
+            color: var(--white);
+            border-color: var(--primary-purple);
+            box-shadow: 0 4px 10px rgba(90, 45, 130, 0.25);
+        }
+
+        .btn-back-site:hover i {
+            transform: translateX(-3px);
         }
 
         /* ===== PAINEL PRINCIPAL ===== */
@@ -220,6 +257,35 @@
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.15);
             background: rgba(0,0,0,0.2);
+        }
+
+        /* Botão de voltar na SIDEBAR */
+        .sidebar-back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--accent-gold);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-back-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-purple-dark);
+            border-color: var(--accent-gold);
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .sidebar-back-btn i {
+            font-size: 14px;
         }
 
         .sidebar-logo {
@@ -395,17 +461,6 @@
             box-shadow: var(--shadow-md);
         }
 
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50px;
-            height: 50px;
-            background: rgba(90, 45, 130, 0.05);
-            border-radius: 50%;
-        }
-
         .metric-card i {
             font-size: 24px;
             color: var(--accent-gold);
@@ -464,10 +519,6 @@
             background-color: #f9f5ff;
         }
 
-        .data-table tr:last-child td {
-            border-bottom: none;
-        }
-
         .btn-action {
             background: var(--primary-purple);
             color: var(--white);
@@ -487,24 +538,12 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .btn-action i {
-            margin-right: 5px;
-        }
-
         .btn-danger {
             background: var(--danger);
         }
 
-        .btn-danger:hover {
-            background: var(--danger-dark);
-        }
-
         .btn-success {
             background: var(--success);
-        }
-
-        .btn-success:hover {
-            background: var(--success-dark);
         }
 
         .btn-warning {
@@ -590,11 +629,6 @@
             border-bottom: 2px solid #f0f0f0;
         }
 
-        .modal-header h3 {
-            color: var(--primary-purple);
-            font-size: 20px;
-        }
-
         .close-btn {
             background: none;
             border: none;
@@ -617,32 +651,16 @@
             display: inline-block;
         }
 
-        .status-active {
-            background: #d4edda;
-            color: #155724;
-        }
+        .status-active { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-completed { background: #d1ecf1; color: #0c5460; }
 
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-completed {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        /* ===== GRÁFICOS ===== */
         .chart-container {
             background: var(--white);
             padding: 20px;
             border-radius: 12px;
             box-shadow: var(--shadow-sm);
             margin-bottom: 20px;
-        }
-
-        .chart-container canvas {
-            max-height: 300px;
         }
 
         .sidebar-overlay {
@@ -656,66 +674,22 @@
             z-index: 90;
         }
 
-        .sidebar-overlay.active {
-            display: block;
-        }
+        .sidebar-overlay.active { display: block; }
 
-        /* ===== RESPONSIVO ===== */
         @media (max-width: 768px) {
-            .sidebar {
-                left: -280px;
-            }
-
-            .sidebar.mobile-open {
-                left: 0;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .content-area {
-                padding: 15px;
-            }
-
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                width: 95%;
-                padding: 20px;
-            }
+            .sidebar { left: -280px; }
+            .sidebar.mobile-open { left: 0; }
+            .main-content { margin-left: 0; }
+            .menu-toggle { display: block; }
+            .content-area { padding: 15px; }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .card-grid { grid-template-columns: 1fr; }
         }
-
-        /* ===== UTILITÁRIOS ===== */
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .mt-10 { margin-top: 10px; }
-        .mt-20 { margin-top: 20px; }
-        .mb-10 { margin-bottom: 10px; }
-        .mb-20 { margin-bottom: 20px; }
-        .p-10 { padding: 10px; }
-        .p-20 { padding: 20px; }
-        .d-flex { display: flex; }
-        .gap-10 { gap: 10px; }
-        .align-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .flex-wrap { flex-wrap: wrap; }
     </style>
 </head>
 <body>
 
-    <!-- ===== TELA DE LOGIN ===== -->
+    <!-- TELA DE LOGIN -->
     <div id="login-screen">
         <div class="login-card">
             <div class="login-logo">
@@ -737,31 +711,37 @@
                 <i class="fas fa-sign-in-alt"></i> Entrar no Sistema
             </button>
             
+            <!-- BOTÃO VOLTAR AO SITE - LOGIN -->
+            <a href="index.html" class="btn-back-site">
+                <i class="fas fa-arrow-left"></i>
+                Voltar para o Site Principal
+            </a>
+            
             <p id="login-error" style="color: var(--danger); font-size: 12px; margin-top: 10px; display: none;">
                 <i class="fas fa-exclamation-circle"></i> Credenciais inválidas. Use: admin_caivcam / CaivCam2026
             </p>
         </div>
     </div>
 
-    <!-- ===== OVERLAY MOBILE ===== -->
+    <!-- OVERLAY MOBILE -->
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileMenu()"></div>
 
-    <!-- ===== MODAL NOVO REGISTO ===== -->
+    <!-- MODAL NOVO REGISTO -->
     <div class="modal" id="newRecordModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modalTitle"><i class="fas fa-file-medical"></i> Novo Registo</h3>
+                <h3><i class="fas fa-file-medical"></i> Novo Registo</h3>
                 <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
             <form id="newRecordForm" onsubmit="saveRecord(event)">
                 <div class="form-group">
-                    <label><i class="fas fa-user"></i> Nome da Vítima / Beneficiário</label>
-                    <input type="text" id="recordName" required placeholder="Nome completo ou anônimo">
+                    <label>Nome da Vítima / Beneficiário</label>
+                    <input type="text" id="recordName" required>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-tag"></i> Categoria</label>
+                    <label>Categoria</label>
                     <select id="recordCategory" required>
-                        <option value="">Selecione a categoria...</option>
+                        <option value="">Selecione...</option>
                         <option value="psicologico">Atendimento Psicológico</option>
                         <option value="juridico">Atendimento Jurídico</option>
                         <option value="familiar">Famílias Vulneráveis</option>
@@ -772,11 +752,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-file-alt"></i> Descrição do Caso</label>
-                    <textarea id="recordDescription" rows="4" required placeholder="Descreva a situação..."></textarea>
+                    <label>Descrição do Caso</label>
+                    <textarea id="recordDescription" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-flag"></i> Estado</label>
+                    <label>Estado</label>
                     <select id="recordStatus" required>
                         <option value="Em Acompanhamento">Em Acompanhamento</option>
                         <option value="Encaminhado">Encaminhado</option>
@@ -784,25 +764,26 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-phone"></i> Contacto (opcional)</label>
-                    <input type="tel" id="recordContact" placeholder="Telefone para contacto">
+                    <label>Contacto (opcional)</label>
+                    <input type="tel" id="recordContact" placeholder="Telefone">
                 </div>
-                <div class="d-flex gap-10 mt-20">
-                    <button type="submit" class="btn-gold" style="flex: 2;">
-                        <i class="fas fa-save"></i> Salvar Registo
-                    </button>
-                    <button type="button" class="btn-action btn-danger" onclick="closeModal()" style="flex: 1;">
-                        <i class="fas fa-times"></i> Cancelar
-                    </button>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn-gold" style="flex: 2;">Salvar</button>
+                    <button type="button" class="btn-action btn-danger" onclick="closeModal()" style="flex: 1;">Cancelar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ===== PAINEL PRINCIPAL ===== -->
+    <!-- PAINEL PRINCIPAL -->
     <div id="app-container">
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
+                <!-- BOTÃO VOLTAR AO SITE - SIDEBAR -->
+                <a href="index.html" class="sidebar-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar ao Site
+                </a>
                 <div class="sidebar-logo">
                     <img src="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="CAIVCAM">
                 </div>
@@ -810,27 +791,13 @@
                 <p>Painel Administrativo</p>
             </div>
             <ul class="sidebar-menu">
-                <li><a class="active" onclick="switchTab('dashboard', this)">
-                    <i class="fas fa-chart-line"></i> Dashboard
-                </a></li>
-                <li><a onclick="switchTab('registos', this)">
-                    <i class="fas fa-folder-open"></i> Todos os Registos
-                </a></li>
-                <li><a onclick="switchTab('psicologico', this)">
-                    <i class="fas fa-brain"></i> Psicológico
-                </a></li>
-                <li><a onclick="switchTab('juridico', this)">
-                    <i class="fas fa-gavel"></i> Jurídico
-                </a></li>
-                <li><a onclick="switchTab('familiar', this)">
-                    <i class="fas fa-users"></i> Familiar
-                </a></li>
-                <li><a onclick="switchTab('idosos', this)">
-                    <i class="fas fa-user-friends"></i> Idosos
-                </a></li>
-                <li><a onclick="switchTab('config', this)">
-                    <i class="fas fa-cog"></i> Configurações
-                </a></li>
+                <li><a class="active" onclick="switchTab('dashboard', this)"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a onclick="switchTab('registos', this)"><i class="fas fa-folder-open"></i> Todos os Registos</a></li>
+                <li><a onclick="switchTab('psicologico', this)"><i class="fas fa-brain"></i> Psicológico</a></li>
+                <li><a onclick="switchTab('juridico', this)"><i class="fas fa-gavel"></i> Jurídico</a></li>
+                <li><a onclick="switchTab('familiar', this)"><i class="fas fa-users"></i> Familiar</a></li>
+                <li><a onclick="switchTab('idosos', this)"><i class="fas fa-user-friends"></i> Idosos</a></li>
+                <li><a onclick="switchTab('config', this)"><i class="fas fa-cog"></i> Configurações</a></li>
             </ul>
             <div class="sidebar-footer">
                 <p>&copy; 2026 CAIVCAM - v1.0</p>
@@ -840,25 +807,18 @@
         <div class="main-content">
             <div class="main-header">
                 <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h2 id="page-title" style="color: var(--primary-purple);">
-                        <i class="fas fa-chart-line"></i> Dashboard
-                    </h2>
+                    <button class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+                    <h2 id="page-title" style="color: var(--primary-purple);">Dashboard</h2>
                 </div>
                 <div class="user-info">
                     <div class="user-avatar">G</div>
-                    <span style="font-size: 13px; font-weight: 600;">Gestor</span>
-                    <button class="btn-action btn-danger" onclick="handleLogout()">
-                        <i class="fas fa-sign-out-alt"></i> Sair
-                    </button>
+                    <span>Gestor</span>
+                    <button class="btn-action btn-danger" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
                 </div>
             </div>
 
             <div class="content-area">
-                
-                <!-- ===== DASHBOARD ===== -->
+                <!-- DASHBOARD -->
                 <div id="dashboard" class="tab-content active">
                     <div class="filter-bar">
                         <div class="filter-group">
@@ -868,54 +828,42 @@
                                 <option value="today">Hoje</option>
                                 <option value="week">Esta Semana</option>
                                 <option value="month">Este Mês</option>
+                                <option value="quarter">Este Trimestre</option>
+                                <option value="semester">Este Semestre</option>
+                                <option value="year">Este Ano</option>
                             </select>
                         </div>
                         <div class="filter-group">
-                            <button class="btn-action btn-success" onclick="exportData('csv')">
-                                <i class="fas fa-file-csv"></i> CSV
-                            </button>
-                            <button class="btn-action" onclick="exportData('json')">
-                                <i class="fas fa-file-code"></i> JSON
-                            </button>
-                            <button class="btn-action btn-warning" onclick="printReport()">
-                                <i class="fas fa-print"></i> Imprimir
-                            </button>
-                            <button class="btn-action" onclick="openNewRecordModal()">
-                                <i class="fas fa-plus"></i> Novo
-                            </button>
+                            <button class="btn-action btn-success" onclick="exportData('csv')"><i class="fas fa-file-csv"></i> CSV</button>
+                            <button class="btn-action" onclick="exportData('json')"><i class="fas fa-file-code"></i> JSON</button>
+                            <button class="btn-action btn-warning" onclick="printReport()"><i class="fas fa-print"></i> Imprimir</button>
+                            <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
                         </div>
                     </div>
 
                     <div class="card-grid" id="dashboardMetrics"></div>
 
                     <div class="chart-container">
-                        <h4 style="margin-bottom: 15px;"><i class="fas fa-chart-bar"></i> Atendimentos por Período</h4>
+                        <h4><i class="fas fa-chart-bar"></i> Atendimentos por Período</h4>
                         <canvas id="dashboardChart"></canvas>
                     </div>
 
                     <div class="table-responsive">
-                        <h4 style="padding: 15px;"><i class="fas fa-clock"></i> Registos Recentes</h4>
-                        <table class="data-table" id="dashboardTable">
+                        <h4 style="padding: 15px;">Registos Recentes</h4>
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Categoria</th>
-                                    <th>Data</th>
-                                    <th>Estado</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
                             </thead>
                             <tbody id="dashboardTableBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ===== TODOS OS REGISTOS ===== -->
+                <!-- REGISTOS -->
                 <div id="registos" class="tab-content">
                     <div class="filter-bar">
                         <div class="filter-group">
-                            <input type="text" id="searchInput" placeholder="🔍 Buscar registos..." onkeyup="filterRecords()">
+                            <input type="text" id="searchInput" placeholder="🔍 Buscar..." onkeyup="filterRecords()">
                         </div>
                         <div class="filter-group">
                             <select id="categoryFilter" onchange="filterRecords()">
@@ -930,155 +878,97 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="table-responsive">
-                        <table class="data-table" id="allRecordsTable">
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Categoria</th>
-                                    <th>Descrição</th>
-                                    <th>Data</th>
-                                    <th>Estado</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Descrição</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
                             </thead>
                             <tbody id="allRecordsBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ===== PSICOLÓGICO ===== -->
+                <!-- PSICOLÓGICO -->
                 <div id="psicologico" class="tab-content">
                     <div class="filter-bar">
                         <h3><i class="fas fa-brain"></i> Atendimentos Psicológicos</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()">
-                            <i class="fas fa-plus"></i> Novo Atendimento
-                        </button>
+                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="data-table" id="psychTable">
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Paciente</th>
-                                    <th>Descrição</th>
-                                    <th>Contacto</th>
-                                    <th>Data</th>
-                                    <th>Estado</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <tr><th>ID</th><th>Paciente</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
                             </thead>
                             <tbody id="psychBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ===== JURÍDICO ===== -->
+                <!-- JURÍDICO -->
                 <div id="juridico" class="tab-content">
                     <div class="filter-bar">
                         <h3><i class="fas fa-gavel"></i> Processos Jurídicos</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()">
-                            <i class="fas fa-plus"></i> Novo Processo
-                        </button>
+                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="data-table" id="legalTable">
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Cliente</th>
-                                    <th>Descrição</th>
-                                    <th>Contacto</th>
-                                    <th>Data</th>
-                                    <th>Estado</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <tr><th>ID</th><th>Cliente</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
                             </thead>
                             <tbody id="legalBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ===== FAMILIAR ===== -->
+                <!-- FAMILIAR -->
                 <div id="familiar" class="tab-content">
                     <div class="filter-bar">
                         <h3><i class="fas fa-users"></i> Casos Familiares</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()">
-                            <i class="fas fa-plus"></i> Novo Caso
-                        </button>
+                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="data-table" id="familyTable">
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Família</th>
-                                    <th>Descrição</th>
-                                    <th>Contacto</th>
-                                    <th>Data</th>
-                                    <th>Estado</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <tr><th>ID</th><th>Família</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
                             </thead>
                             <tbody id="familyBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ===== IDOSOS ===== -->
+                <!-- IDOSOS -->
                 <div id="idosos" class="tab-content">
                     <div class="filter-bar">
                         <h3><i class="fas fa-user-friends"></i> Casos de Idosos</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()">
-                            <i class="fas fa-plus"></i> Novo Caso
-                        </button>
+                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="data-table" id="elderlyTable">
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Idoso</th>
-                                    <th>Descrição</th>
-                                    <th>Contacto</th>
-                                    <th>Data</th>
-                                    <th>Estado</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <tr><th>ID</th><th>Idoso</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
                             </thead>
                             <tbody id="elderlyBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ===== CONFIGURAÇÕES ===== -->
+                <!-- CONFIGURAÇÕES -->
                 <div id="config" class="tab-content">
                     <div class="card-grid">
                         <div class="metric-card">
                             <i class="fas fa-database"></i>
-                            <h3>Backup dos Dados</h3>
-                            <p class="mb-20" style="font-size: 12px; color: #666;">Exportar todos os registos para arquivo</p>
-                            <button class="btn-action btn-success" onclick="backupData()">
-                                <i class="fas fa-download"></i> Fazer Backup
-                            </button>
+                            <h3>Backup</h3>
+                            <button class="btn-action btn-success" onclick="backupData()">Fazer Backup</button>
                         </div>
                         <div class="metric-card">
                             <i class="fas fa-trash-alt"></i>
                             <h3>Limpar Dados</h3>
-                            <p class="mb-20" style="font-size: 12px; color: #666;">Apagar todos os registos de teste</p>
-                            <button class="btn-action btn-danger" onclick="clearData()">
-                                <i class="fas fa-trash"></i> Limpar Tudo
-                            </button>
+                            <button class="btn-action btn-danger" onclick="clearData()">Limpar Tudo</button>
                         </div>
                         <div class="metric-card">
                             <i class="fas fa-key"></i>
-                            <h3>Alterar Palavra-passe</h3>
-                            <p class="mb-20" style="font-size: 12px; color: #666;">Atualizar credenciais de acesso</p>
-                            <button class="btn-action" onclick="showPasswordModal()">
-                                <i class="fas fa-edit"></i> Alterar
-                            </button>
+                            <h3>Alterar Senha</h3>
+                            <button class="btn-action" onclick="showPasswordModal()">Alterar</button>
                         </div>
                     </div>
                 </div>
@@ -1088,70 +978,23 @@
     </div>
 
     <script>
-        // ===== DADOS =====
         let records = [];
         let nextId = 1;
         let dashboardChart = null;
 
         const initialRecords = [
-            {
-                id: 1,
-                name: 'Maria Silva',
-                category: 'idosos',
-                categoryLabel: 'Abandono de Idosos',
-                description: 'Caso de abandono familiar na comunidade da Camama',
-                contact: '923456789',
-                date: '2026-09-01',
-                status: 'Em Acompanhamento',
-                type: 'psicologico'
-            },
-            {
-                id: 2,
-                name: 'João Santos',
-                category: 'alimentos',
-                categoryLabel: 'Paternidade & Alimentos',
-                description: 'Fuga à prestação de alimentos',
-                contact: '912345678',
-                date: '2026-08-31',
-                status: 'Encaminhado',
-                type: 'juridico'
-            },
-            {
-                id: 3,
-                name: 'Anônimo',
-                category: 'psicologico',
-                categoryLabel: 'Atendimento Psicológico',
-                description: 'Violência psicológica doméstica',
-                contact: '',
-                date: '2026-08-30',
-                status: 'Concluído',
-                type: 'psicologico'
-            },
-            {
-                id: 4,
-                name: 'Criança A',
-                category: 'criancas',
-                categoryLabel: 'Crianças Violentadas',
-                description: 'Caso prioritário de proteção infantil',
-                contact: '',
-                date: '2026-08-29',
-                status: 'Em Acompanhamento',
-                type: 'psicologico'
-            },
-            {
-                id: 5,
-                name: 'Família B',
-                category: 'familiar',
-                categoryLabel: 'Famílias Vulneráveis',
-                description: 'Programa de reinserção social',
-                contact: '934567890',
-                date: '2026-08-28',
-                status: 'Em Acompanhamento',
-                type: 'social'
-            }
+            { id: 1, name: 'Maria Silva', category: 'idosos', categoryLabel: 'Abandono de Idosos', description: 'Caso de abandono familiar', contact: '923456789', date: '2026-09-01', status: 'Em Acompanhamento', type: 'psicologico' },
+            { id: 2, name: 'João Santos', category: 'alimentos', categoryLabel: 'Paternidade & Alimentos', description: 'Fuga à prestação de alimentos', contact: '912345678', date: '2026-08-31', status: 'Encaminhado', type: 'juridico' },
+            { id: 3, name: 'Anônimo', category: 'psicologico', categoryLabel: 'Atendimento Psicológico', description: 'Violência psicológica', contact: '', date: '2026-08-30', status: 'Concluído', type: 'psicologico' },
+            { id: 4, name: 'Criança A', category: 'criancas', categoryLabel: 'Crianças Violentadas', description: 'Proteção infantil', contact: '', date: '2026-08-29', status: 'Em Acompanhamento', type: 'psicologico' },
+            { id: 5, name: 'Família B', category: 'familiar', categoryLabel: 'Famílias Vulneráveis', description: 'Reinserção social', contact: '934567890', date: '2026-08-28', status: 'Em Acompanhamento', type: 'social' },
+            { id: 6, name: 'António Costa', category: 'idosos', categoryLabel: 'Abandono de Idosos', description: 'Idoso sem suporte familiar', contact: '945678901', date: '2026-06-15', status: 'Concluído', type: 'psicologico' },
+            { id: 7, name: 'Família C', category: 'comunidade', categoryLabel: 'Conflitos Comunitários', description: 'Disputa de terrenos', contact: '956789012', date: '2026-04-10', status: 'Encaminhado', type: 'social' },
+            { id: 8, name: 'Rosa Mendes', category: 'juridico', categoryLabel: 'Atendimento Jurídico', description: 'Processo de divórcio', contact: '967890123', date: '2026-03-20', status: 'Concluído', type: 'juridico' },
+            { id: 9, name: 'Criança B', category: 'criancas', categoryLabel: 'Crianças Violentadas', description: 'Caso de negligência', contact: '', date: '2026-02-05', status: 'Em Acompanhamento', type: 'psicologico' },
+            { id: 10, name: 'Família D', category: 'familiar', categoryLabel: 'Famílias Vulneráveis', description: 'Apoio alimentar', contact: '978901234', date: '2026-01-18', status: 'Concluído', type: 'social' }
         ];
 
-        // ===== LOGIN =====
         function handleLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -1159,12 +1002,10 @@
             if (username === 'admin_caivcam' && password === 'CaivCam2026') {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('app-container').classList.add('active');
-                
                 if (records.length === 0) {
                     records = [...initialRecords];
-                    nextId = 6;
+                    nextId = 11;
                 }
-                
                 updateAllTables();
                 initChart();
             } else {
@@ -1179,15 +1020,9 @@
             document.getElementById('login-error').style.display = 'none';
         }
 
-        // ===== NAVEGAÇÃO =====
         function switchTab(tabId, element) {
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            document.querySelectorAll('.sidebar-menu a').forEach(el => {
-                el.classList.remove('active');
-            });
-            
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             if (element) {
                 element.classList.add('active');
@@ -1205,7 +1040,6 @@
             document.getElementById('sidebar-overlay').classList.remove('active');
         }
 
-        // ===== ATUALIZAÇÃO =====
         function updateAllTables() {
             updateDashboard();
             updateAllRecordsTable();
@@ -1219,16 +1053,26 @@
         function updateDashboard() {
             const timeFilter = document.getElementById('timeFilter').value;
             let filteredRecords = [...records];
-            
             const today = new Date();
+            const todayStr = today.toISOString().split('T')[0];
+            
             if (timeFilter === 'today') {
-                filteredRecords = filteredRecords.filter(r => r.date === today.toISOString().split('T')[0]);
+                filteredRecords = filteredRecords.filter(r => r.date === todayStr);
             } else if (timeFilter === 'week') {
                 const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= weekAgo);
             } else if (timeFilter === 'month') {
                 const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= monthAgo);
+            } else if (timeFilter === 'quarter') {
+                const quarterAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+                filteredRecords = filteredRecords.filter(r => new Date(r.date) >= quarterAgo);
+            } else if (timeFilter === 'semester') {
+                const semesterAgo = new Date(today.getTime() - 180 * 24 * 60 * 60 * 1000);
+                filteredRecords = filteredRecords.filter(r => new Date(r.date) >= semesterAgo);
+            } else if (timeFilter === 'year') {
+                const yearAgo = new Date(today.getTime() - 365 * 24 * 60 * 60 * 1000);
+                filteredRecords = filteredRecords.filter(r => new Date(r.date) >= yearAgo);
             }
             
             const metrics = {
@@ -1241,112 +1085,19 @@
             };
             
             document.getElementById('dashboardMetrics').innerHTML = `
-                <div class="metric-card">
-                    <i class="fas fa-file-alt"></i>
-                    <h3>Total de Registos</h3>
-                    <div class="value">${metrics.total}</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Psicológicos</h3>
-                    <div class="value">${metrics.psicologico}</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-gavel"></i>
-                    <h3>Jurídicos</h3>
-                    <div class="value">${metrics.juridico}</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Sociais</h3>
-                    <div class="value">${metrics.social}</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Ativos</h3>
-                    <div class="value">${metrics.ativos}</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>Concluídos</h3>
-                    <div class="value">${metrics.concluidos}</div>
-                </div>
+                <div class="metric-card"><i class="fas fa-file-alt"></i><h3>Total</h3><div class="value">${metrics.total}</div></div>
+                <div class="metric-card"><i class="fas fa-brain"></i><h3>Psicológicos</h3><div class="value">${metrics.psicologico}</div></div>
+                <div class="metric-card"><i class="fas fa-gavel"></i><h3>Jurídicos</h3><div class="value">${metrics.juridico}</div></div>
+                <div class="metric-card"><i class="fas fa-users"></i><h3>Sociais</h3><div class="value">${metrics.social}</div></div>
+                <div class="metric-card"><i class="fas fa-clock"></i><h3>Ativos</h3><div class="value">${metrics.ativos}</div></div>
+                <div class="metric-card"><i class="fas fa-check-circle"></i><h3>Concluídos</h3><div class="value">${metrics.concluidos}</div></div>
             `;
             
             const tableBody = document.getElementById('dashboardTableBody');
             tableBody.innerHTML = '';
-            
             filteredRecords.slice(0, 10).forEach(record => {
                 const row = tableBody.insertRow();
-                row.innerHTML = `
-                    <td><strong>#CC-${record.id.toString().padStart(4, '0')}</strong></td>
-                    <td>${record.name}</td>
-                    <td>${record.categoryLabel}</td>
-                    <td>${record.date}</td>
-                    <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
-                    <td>
-                        <button class="btn-action btn-sm" onclick="viewRecord(${record.id})">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn-action btn-sm btn-danger" onclick="deleteRecord(${record.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
-            });
-        }
-
-        function updateAllRecordsTable() {
-            const tableBody = document.getElementById('allRecordsBody');
-            tableBody.innerHTML = '';
-            
-            records.forEach(record => {
-                const row = tableBody.insertRow();
                 row.innerHTML = createTableRow(record);
-            });
-        }
-
-        function updatePsychTable() {
-            const psychRecords = records.filter(r => r.type === 'psicologico');
-            const tableBody = document.getElementById('psychBody');
-            tableBody.innerHTML = '';
-            
-            psychRecords.forEach(record => {
-                const row = tableBody.insertRow();
-                row.innerHTML = createTableRow(record, 'PS');
-            });
-        }
-
-        function updateLegalTable() {
-            const legalRecords = records.filter(r => r.type === 'juridico');
-            const tableBody = document.getElementById('legalBody');
-            tableBody.innerHTML = '';
-            
-            legalRecords.forEach(record => {
-                const row = tableBody.insertRow();
-                row.innerHTML = createTableRow(record, 'JR');
-            });
-        }
-
-        function updateFamilyTable() {
-            const familyRecords = records.filter(r => r.type === 'social' || r.category === 'familiar');
-            const tableBody = document.getElementById('familyBody');
-            tableBody.innerHTML = '';
-            
-            familyRecords.forEach(record => {
-                const row = tableBody.insertRow();
-                row.innerHTML = createTableRow(record, 'FM');
-            });
-        }
-
-        function updateElderlyTable() {
-            const elderlyRecords = records.filter(r => r.category === 'idosos');
-            const tableBody = document.getElementById('elderlyBody');
-            tableBody.innerHTML = '';
-            
-            elderlyRecords.forEach(record => {
-                const row = tableBody.insertRow();
-                row.innerHTML = createTableRow(record, 'ID');
             });
         }
 
@@ -1360,12 +1111,8 @@
                 <td>${record.date}</td>
                 <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
                 <td>
-                    <button class="btn-action btn-sm" onclick="viewRecord(${record.id})">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn-action btn-sm btn-danger" onclick="deleteRecord(${record.id})">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <button class="btn-action btn-sm" onclick="viewRecord(${record.id})"><i class="fas fa-eye"></i></button>
+                    <button class="btn-action btn-sm btn-danger" onclick="deleteRecord(${record.id})"><i class="fas fa-trash"></i></button>
                 </td>
             `;
         }
@@ -1377,16 +1124,64 @@
             return 'active';
         }
 
-        // ===== GRÁFICO =====
+        function updateAllRecordsTable() {
+            const tableBody = document.getElementById('allRecordsBody');
+            tableBody.innerHTML = '';
+            records.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = createTableRow(record);
+            });
+        }
+
+        function updatePsychTable() {
+            const psychRecords = records.filter(r => r.type === 'psicologico');
+            const tableBody = document.getElementById('psychBody');
+            tableBody.innerHTML = '';
+            psychRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = createTableRow(record, 'PS');
+            });
+        }
+
+        function updateLegalTable() {
+            const legalRecords = records.filter(r => r.type === 'juridico');
+            const tableBody = document.getElementById('legalBody');
+            tableBody.innerHTML = '';
+            legalRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = createTableRow(record, 'JR');
+            });
+        }
+
+        function updateFamilyTable() {
+            const familyRecords = records.filter(r => r.type === 'social' || r.category === 'familiar');
+            const tableBody = document.getElementById('familyBody');
+            tableBody.innerHTML = '';
+            familyRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = createTableRow(record, 'FM');
+            });
+        }
+
+        function updateElderlyTable() {
+            const elderlyRecords = records.filter(r => r.category === 'idosos');
+            const tableBody = document.getElementById('elderlyBody');
+            tableBody.innerHTML = '';
+            elderlyRecords.forEach(record => {
+                const row = tableBody.insertRow();
+                row.innerHTML = createTableRow(record, 'ID');
+            });
+        }
+
         function initChart() {
             const ctx = document.getElementById('dashboardChart').getContext('2d');
             dashboardChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                     datasets: [{
                         label: 'Atendimentos',
-                        data: [150, 180, 200, 220, 210, 240],
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                         backgroundColor: 'rgba(90, 45, 130, 0.6)',
                         borderColor: '#5a2d82',
                         borderWidth: 1
@@ -1395,32 +1190,20 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
         }
 
         function updateChart() {
             if (dashboardChart) {
-                // Atualizar com dados reais
-                const today = new Date();
-                const months = [];
-                const data = [];
+                const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+                const data = new Array(12).fill(0);
                 
-                for (let i = 5; i >= 0; i--) {
-                    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
-                    const monthRecords = records.filter(r => {
-                        const recordDate = new Date(r.date);
-                        return recordDate.getFullYear() === date.getFullYear() && 
-                               recordDate.getMonth() === date.getMonth();
-                    });
-                    months.push(date.toLocaleDateString('pt-PT', { month: 'short' }));
-                    data.push(monthRecords.length);
-                }
+                records.forEach(r => {
+                    const date = new Date(r.date);
+                    data[date.getMonth()]++;
+                });
                 
                 dashboardChart.data.labels = months;
                 dashboardChart.data.datasets[0].data = data;
@@ -1428,7 +1211,6 @@
             }
         }
 
-        // ===== CRUD =====
         function openNewRecordModal() {
             document.getElementById('newRecordModal').classList.add('active');
             document.getElementById('newRecordForm').reset();
@@ -1440,7 +1222,6 @@
 
         function saveRecord(event) {
             event.preventDefault();
-            
             const category = document.getElementById('recordCategory').value;
             const newRecord = {
                 id: nextId++,
@@ -1453,15 +1234,10 @@
                 status: document.getElementById('recordStatus').value,
                 type: category === 'juridico' ? 'juridico' : category === 'psicologico' ? 'psicologico' : 'social'
             };
-            
             records.unshift(newRecord);
             updateAllTables();
             closeModal();
-            
-            alert('✅ Registo criado com sucesso!\n\n' +
-                  'ID: #CC-' + newRecord.id.toString().padStart(4, '0') + '\n' +
-                  'Nome: ' + newRecord.name + '\n' +
-                  'Categoria: ' + newRecord.categoryLabel);
+            alert('✅ Registo criado com sucesso!\n\nID: #CC-' + newRecord.id.toString().padStart(4, '0'));
         }
 
         function getCategoryLabel(category) {
@@ -1498,7 +1274,6 @@
             }
         }
 
-        // ===== FILTROS =====
         function filterRecords() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
@@ -1513,23 +1288,17 @@
             
             const tableBody = document.getElementById('allRecordsBody');
             tableBody.innerHTML = '';
-            
             filteredRecords.forEach(record => {
                 const row = tableBody.insertRow();
                 row.innerHTML = createTableRow(record);
             });
         }
 
-        // ===== EXPORTAÇÃO =====
         function exportData(format) {
             const data = records.map(r => ({
-                id: r.id,
-                nome: r.name,
-                categoria: r.categoryLabel,
-                descricao: r.description,
-                contacto: r.contact,
-                data: r.date,
-                estado: r.status
+                id: r.id, nome: r.name, categoria: r.categoryLabel,
+                descricao: r.description, contacto: r.contact,
+                data: r.date, estado: r.status
             }));
             
             if (format === 'csv') {
@@ -1558,75 +1327,55 @@
         function printReport() {
             const printWindow = window.open('', '_blank');
             printWindow.document.write('<html><head><title>Relatório CAIVCAM</title>');
-            printWindow.document.write('<style>table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #ddd; padding: 8px; text-align: left; } th { background: #5a2d82; color: white; }</style>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write('<h1 style="color: #5a2d82;">Relatório CAIVCAM</h1>');
+            printWindow.document.write('<style>table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #ddd; padding: 8px; } th { background: #5a2d82; color: white; }</style></head><body>');
+            printWindow.document.write('<h1 style="color:#5a2d82;">Relatório CAIVCAM</h1>');
             printWindow.document.write('<p>Data: ' + new Date().toLocaleDateString('pt-PT') + '</p>');
-            printWindow.document.write('<p>Total de registos: ' + records.length + '</p>');
-            printWindow.document.write('<table>');
-            printWindow.document.write('<tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
-            
+            printWindow.document.write('<p>Total: ' + records.length + ' registos</p>');
+            printWindow.document.write('<table><tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
             records.forEach(r => {
-                printWindow.document.write(`<tr>`);
-                printWindow.document.write(`<td>#CC-${r.id}</td>`);
-                printWindow.document.write(`<td>${r.name}</td>`);
-                printWindow.document.write(`<td>${r.categoryLabel}</td>`);
-                printWindow.document.write(`<td>${r.date}</td>`);
-                printWindow.document.write(`<td>${r.status}</td>`);
-                printWindow.document.write(`</tr>`);
+                printWindow.document.write(`<tr><td>#CC-${r.id}</td><td>${r.name}</td><td>${r.categoryLabel}</td><td>${r.date}</td><td>${r.status}</td></tr>`);
             });
-            
-            printWindow.document.write('</table>');
-            printWindow.document.write('</body></html>');
+            printWindow.document.write('</table></body></html>');
             printWindow.document.close();
             printWindow.print();
         }
 
-        // ===== CONFIGURAÇÕES =====
         function backupData() {
             exportData('json');
-            alert('✅ Backup dos dados criado com sucesso!');
+            alert('✅ Backup criado com sucesso!');
         }
 
         function clearData() {
-            if (confirm('⚠️ ATENÇÃO: Esta ação irá apagar TODOS os registos!\n\nTem certeza?')) {
-                if (confirm('Confirmação final: Apagar ' + records.length + ' registos?')) {
+            if (confirm('⚠️ Apagar TODOS os registos?')) {
+                if (confirm('Confirmação final?')) {
                     records = [];
                     nextId = 1;
                     updateAllTables();
-                    alert('✅ Todos os dados foram apagados.');
+                    alert('✅ Dados apagados.');
                 }
             }
         }
 
         function showPasswordModal() {
-            const currentPass = prompt('Digite a palavra-passe atual:');
+            const currentPass = prompt('Palavra-passe atual:');
             if (currentPass === 'CaivCam2026') {
-                const newPass = prompt('Digite a nova palavra-passe (mínimo 6 caracteres):');
+                const newPass = prompt('Nova palavra-passe (mínimo 6 caracteres):');
                 if (newPass && newPass.length >= 6) {
-                    alert('✅ Palavra-passe alterada com sucesso!\n\nNova senha: ' + newPass);
+                    alert('✅ Senha alterada com sucesso!');
                 } else {
-                    alert('❌ A nova palavra-passe deve ter pelo menos 6 caracteres.');
+                    alert('❌ A nova senha deve ter pelo menos 6 caracteres.');
                 }
             } else {
                 alert('❌ Palavra-passe atual incorreta.');
             }
         }
 
-        // ===== INICIALIZAÇÃO =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Login com Enter
             document.getElementById('password').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleLogin();
-                }
+                if (e.key === 'Enter') handleLogin();
             });
-            
-            // Fechar modal ao clicar fora
             document.getElementById('newRecordModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal();
-                }
+                if (e.target === this) closeModal();
             });
         });
     </script>
