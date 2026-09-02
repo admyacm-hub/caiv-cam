@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAIVCAM - Centro de Apoio Integrado à Vítima de Violência da Camama</title>
     <link rel="icon" type="image/jpeg" href="RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -18,15 +18,15 @@
             --transition: all 0.3s ease;
         }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
         }
 
         body {
@@ -40,7 +40,6 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Top Bar */
         .top-bar {
             background-color: var(--primary);
             color: var(--white);
@@ -65,7 +64,6 @@
             text-decoration: underline;
         }
 
-        /* Header & Navigation */
         header {
             background-color: var(--white);
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -202,7 +200,6 @@
             transform: translateY(-2px);
         }
 
-        /* Hamburger Menu Toggle (Mobile) */
         .menu-toggle {
             display: none;
             font-size: 1.8rem;
@@ -215,7 +212,6 @@
             color: var(--accent);
         }
 
-        /* Hero Banner */
         .hero {
             background: linear-gradient(rgba(90, 45, 130, 0.88), rgba(90, 45, 130, 0.92)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80') center/cover;
             color: var(--white);
@@ -273,7 +269,6 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
-        /* Sections */
         section {
             padding: 80px 5%;
             transition: var(--transition);
@@ -307,7 +302,6 @@
             border-radius: 2px;
         }
 
-        /* Services Grid */
         .grid-4 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -351,7 +345,6 @@
             font-size: 1.15rem;
         }
 
-        /* Violence Types */
         .violence-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -398,7 +391,6 @@
             color: #555;
         }
 
-        /* Contact & Forms */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -485,7 +477,6 @@
             transform: translateY(-2px);
         }
 
-        /* Back to top floating button */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -519,7 +510,6 @@
             transform: translateY(-4px);
         }
 
-        /* Footer */
         footer {
             background-color: var(--primary);
             color: var(--white);
@@ -534,7 +524,6 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Media Queries for Mobile & Tablet */
         @media (max-width: 900px) {
             .menu-toggle {
                 display: block;
@@ -727,15 +716,15 @@
                 <h3>Formulário de Apoio / Denúncia Confidencial</h3>
                 <form id="safeForm" onsubmit="handleFormSubmit(event)">
                     <input type="text" placeholder="Seu Nome (Opcional para sigilo)">
-                    <input type="text" placeholder="Contacto Telefónico" required="">
-                    <select required="">
+                    <input type="text" placeholder="Contacto Telefónico" required>
+                    <select required>
                         <option value="">Selecione o Tipo de Ajuda Necessária</option>
                         <option value="juridico">Aconselhamento Jurídico</option>
                         <option value="psicologico">Apoio Psicológico</option>
                         <option value="denuncia">Denúncia de Violência</option>
                         <option value="outro">Outro Assunto</option>
                     </select>
-                    <textarea rows="4" placeholder="Descreva a situação ou o apoio necessário..." required=""></textarea>
+                    <textarea rows="4" placeholder="Descreva a situação ou o apoio necessário..." required></textarea>
                     <button type="submit" class="btn">Enviar com Confidencialidade</button>
                 </form>
             </div>
