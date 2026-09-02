@@ -69,7 +69,6 @@
             align-items: center;
             z-index: 1000;
             padding: 20px;
-            transition: opacity 0.5s ease;
         }
 
         #login-screen.hidden {
@@ -85,18 +84,6 @@
             max-width: 420px;
             text-align: center;
             border-top: 6px solid var(--accent-gold);
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .login-logo {
@@ -105,14 +92,12 @@
             margin: 0 auto 20px;
             border-radius: 50%;
             border: 3px solid var(--accent-gold);
-            box-shadow: 0 5px 15px rgba(90, 45, 130, 0.3);
             overflow: hidden;
         }
 
         .login-logo img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
         }
 
@@ -120,7 +105,6 @@
             color: var(--primary-purple);
             margin-bottom: 5px;
             font-size: 24px;
-            font-weight: 700;
         }
 
         .login-card p {
@@ -141,7 +125,6 @@
             color: var(--primary-purple);
             font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .form-group input, 
@@ -153,7 +136,6 @@
             border-radius: 8px;
             font-size: 14px;
             transition: var(--transition);
-            background-color: #fafafa;
         }
 
         .form-group input:focus,
@@ -161,7 +143,6 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-purple);
-            background-color: var(--white);
             box-shadow: 0 0 0 3px rgba(90, 45, 130, 0.1);
         }
 
@@ -176,9 +157,6 @@
             font-size: 15px;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -190,7 +168,6 @@
             box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
 
-        /* Botão de voltar ao site - LOGIN */
         .btn-back-site {
             display: flex;
             align-items: center;
@@ -210,23 +187,12 @@
             transition: all 0.25s ease;
         }
 
-        .btn-back-site i {
-            font-size: 16px;
-            transition: transform 0.2s ease;
-        }
-
         .btn-back-site:hover {
             background: var(--primary-purple);
             color: var(--white);
-            border-color: var(--primary-purple);
-            box-shadow: 0 4px 10px rgba(90, 45, 130, 0.25);
         }
 
-        .btn-back-site:hover i {
-            transform: translateX(-3px);
-        }
-
-        /* ===== PAINEL PRINCIPAL ===== */
+        /* ===== PAINEL ===== */
         #app-container {
             display: none;
             width: 100%;
@@ -243,23 +209,19 @@
             color: var(--white);
             display: flex;
             flex-direction: column;
-            border-right: 3px solid var(--accent-gold);
             min-height: 100vh;
             position: fixed;
             left: 0;
             top: 0;
             z-index: 100;
-            transition: transform 0.3s ease;
         }
 
         .sidebar-header {
             padding: 20px 15px;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.15);
-            background: rgba(0,0,0,0.2);
         }
 
-        /* Botão de voltar na SIDEBAR */
         .sidebar-back-btn {
             display: flex;
             align-items: center;
@@ -271,21 +233,14 @@
             padding: 10px 14px;
             border-radius: 6px;
             font-size: 13px;
-            font-weight: 600;
             text-decoration: none;
             margin-bottom: 15px;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
         .sidebar-back-btn:hover {
             background: var(--accent-gold);
             color: var(--primary-purple-dark);
-            border-color: var(--accent-gold);
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-        }
-
-        .sidebar-back-btn i {
-            font-size: 14px;
         }
 
         .sidebar-logo {
@@ -306,12 +261,6 @@
         .sidebar-header h2 {
             font-size: 18px;
             color: var(--accent-gold);
-            margin-bottom: 5px;
-        }
-
-        .sidebar-header p {
-            font-size: 11px;
-            color: #ccc;
         }
 
         .sidebar-menu {
@@ -331,22 +280,15 @@
             gap: 10px;
             padding: 12px 15px;
             color: #ddd;
-            text-decoration: none;
             font-size: 13px;
             border-radius: 6px;
-            transition: all 0.2s ease;
             cursor: pointer;
-        }
-
-        .sidebar-menu li a i {
-            width: 20px;
-            text-align: center;
+            transition: all 0.2s;
         }
 
         .sidebar-menu li a:hover {
             background-color: rgba(255,255,255,0.1);
             color: var(--white);
-            transform: translateX(5px);
         }
 
         .sidebar-menu li a.active {
@@ -355,25 +297,16 @@
             font-weight: 600;
         }
 
-        .sidebar-footer {
-            padding: 15px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            text-align: center;
-            font-size: 11px;
-            color: #aaa;
-        }
-
         .main-content {
             flex-grow: 1;
             margin-left: 280px;
             display: flex;
             flex-direction: column;
             height: 100vh;
-            transition: margin-left 0.3s ease;
         }
 
         .main-header {
-            background-color: var(--white);
+            background: var(--white);
             padding: 15px 25px;
             display: flex;
             justify-content: space-between;
@@ -381,27 +314,6 @@
             border-bottom: 1px solid var(--gray-border);
             min-height: 70px;
             box-shadow: var(--shadow-sm);
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: var(--primary-purple);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
 
         .user-avatar {
@@ -420,28 +332,21 @@
             padding: 25px;
             overflow-y: auto;
             flex-grow: 1;
-            background-color: var(--bg-light);
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* ===== COMPONENTES ===== */
+        /* ===== DASHBOARD MELHORADA ===== */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             margin-bottom: 25px;
         }
 
@@ -451,9 +356,8 @@
             border-radius: 12px;
             box-shadow: var(--shadow-sm);
             border-left: 4px solid var(--accent-gold);
+            text-align: center;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
         }
 
         .metric-card:hover {
@@ -462,27 +366,25 @@
         }
 
         .metric-card i {
-            font-size: 24px;
+            font-size: 28px;
             color: var(--accent-gold);
             margin-bottom: 10px;
         }
 
         .metric-card h3 {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-light);
-            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-bottom: 8px;
         }
 
         .metric-card .value {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: var(--primary-purple);
         }
 
         .table-responsive {
-            width: 100%;
             overflow-x: auto;
             background: var(--white);
             border-radius: 12px;
@@ -493,20 +395,17 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px;
+            min-width: 700px;
         }
 
         .data-table th {
             background-color: var(--primary-purple);
             color: var(--white);
-            padding: 15px;
+            padding: 12px 15px;
             text-align: left;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .data-table td {
@@ -528,33 +427,17 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
-            white-space: nowrap;
             transition: var(--transition);
-            margin: 2px;
         }
 
         .btn-action:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
         }
 
-        .btn-danger {
-            background: var(--danger);
-        }
-
-        .btn-success {
-            background: var(--success);
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: #333;
-        }
-
-        .btn-sm {
-            padding: 5px 10px;
-            font-size: 11px;
-        }
+        .btn-danger { background: var(--danger); }
+        .btn-success { background: var(--success); }
+        .btn-warning { background: var(--warning); color: #333; }
+        .btn-sm { padding: 5px 10px; font-size: 11px; }
 
         .filter-bar {
             display: flex;
@@ -575,72 +458,10 @@
             gap: 10px;
         }
 
-        .filter-group select,
-        .filter-group input {
+        .filter-group select, .filter-group input {
             padding: 8px 12px;
             border: 2px solid var(--gray-border);
             border-radius: 6px;
-            font-size: 13px;
-        }
-
-        .filter-group select:focus,
-        .filter-group input:focus {
-            outline: none;
-            border-color: var(--primary-purple);
-        }
-
-        /* ===== MODAL ===== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-lg);
-            animation: slideUp 0.3s ease;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #999;
-            transition: var(--transition);
-        }
-
-        .close-btn:hover {
-            color: var(--danger);
-            transform: rotate(90deg);
         }
 
         .status-badge {
@@ -648,7 +469,6 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
-            display: inline-block;
         }
 
         .status-active { background: #d4edda; color: #155724; }
@@ -663,47 +483,65 @@
             margin-bottom: 20px;
         }
 
-        .sidebar-overlay {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 90;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
 
-        .sidebar-overlay.active { display: block; }
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
 
         @media (max-width: 768px) {
             .sidebar { left: -280px; }
             .sidebar.mobile-open { left: 0; }
             .main-content { margin-left: 0; }
-            .menu-toggle { display: block; }
-            .content-area { padding: 15px; }
-            .filter-bar { flex-direction: column; align-items: stretch; }
-            .card-grid { grid-template-columns: 1fr; }
+            .filter-bar { flex-direction: column; }
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <!-- TELA DE LOGIN -->
+    <!-- LOGIN -->
     <div id="login-screen">
         <div class="login-card">
             <div class="login-logo">
-                <img src="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="CAIVCAM Logo">
+                <img src="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="CAIVCAM">
             </div>
             <h2>CAIVCAM Admin</h2>
             <p>Centro de Apoio Integrado à Vítima de Violência da Camama</p>
             
             <div class="form-group">
-                <label><i class="fas fa-user"></i> Utilizador</label>
-                <input type="text" id="username" value="admin_caivcam" placeholder="Digite seu utilizador">
+                <label>Utilizador</label>
+                <input type="text" id="username" value="admin_caivcam">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-lock"></i> Palavra-passe</label>
+                <label>Palavra-passe</label>
                 <input type="password" id="password" placeholder="Digite sua palavra-passe">
             </div>
             
@@ -711,49 +549,44 @@
                 <i class="fas fa-sign-in-alt"></i> Entrar no Sistema
             </button>
             
-            <!-- BOTÃO VOLTAR AO SITE - LOGIN -->
             <a href="index.html" class="btn-back-site">
-                <i class="fas fa-arrow-left"></i>
-                Voltar para o Site Principal
+                <i class="fas fa-arrow-left"></i> Voltar para o Site Principal
             </a>
             
-            <p id="login-error" style="color: var(--danger); font-size: 12px; margin-top: 10px; display: none;">
-                <i class="fas fa-exclamation-circle"></i> Credenciais inválidas. Use: admin_caivcam / CaivCam2026
+            <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">
+                Credenciais inválidas. Use: admin_caivcam / CaivCam2026
             </p>
         </div>
     </div>
 
-    <!-- OVERLAY MOBILE -->
-    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileMenu()"></div>
-
-    <!-- MODAL NOVO REGISTO -->
+    <!-- MODAL -->
     <div class="modal" id="newRecordModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-file-medical"></i> Novo Registo</h3>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <h3>Novo Registo</h3>
                 <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
-            <form id="newRecordForm" onsubmit="saveRecord(event)">
+            <form onsubmit="saveRecord(event)">
                 <div class="form-group">
-                    <label>Nome da Vítima / Beneficiário</label>
+                    <label>Nome</label>
                     <input type="text" id="recordName" required>
                 </div>
                 <div class="form-group">
                     <label>Categoria</label>
                     <select id="recordCategory" required>
                         <option value="">Selecione...</option>
-                        <option value="psicologico">Atendimento Psicológico</option>
-                        <option value="juridico">Atendimento Jurídico</option>
-                        <option value="familiar">Famílias Vulneráveis</option>
-                        <option value="criancas">Crianças Violentadas</option>
-                        <option value="alimentos">Paternidade & Alimentos</option>
-                        <option value="idosos">Abandono de Idosos</option>
-                        <option value="comunidade">Conflitos Comunitários</option>
+                        <option value="psicologico">Psicológico</option>
+                        <option value="juridico">Jurídico</option>
+                        <option value="familiar">Familiar</option>
+                        <option value="criancas">Crianças</option>
+                        <option value="alimentos">Alimentos</option>
+                        <option value="idosos">Idosos</option>
+                        <option value="comunidade">Comunidade</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Descrição do Caso</label>
-                    <textarea id="recordDescription" rows="4" required></textarea>
+                    <label>Descrição</label>
+                    <textarea id="recordDescription" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Estado</label>
@@ -764,31 +597,25 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Contacto (opcional)</label>
-                    <input type="tel" id="recordContact" placeholder="Telefone">
+                    <label>Contacto</label>
+                    <input type="tel" id="recordContact" placeholder="Opcional">
                 </div>
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button type="submit" class="btn-gold" style="flex: 2;">Salvar</button>
-                    <button type="button" class="btn-action btn-danger" onclick="closeModal()" style="flex: 1;">Cancelar</button>
-                </div>
+                <button type="submit" class="btn-gold">Salvar</button>
             </form>
         </div>
     </div>
 
-    <!-- PAINEL PRINCIPAL -->
+    <!-- PAINEL -->
     <div id="app-container">
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <!-- BOTÃO VOLTAR AO SITE - SIDEBAR -->
                 <a href="index.html" class="sidebar-back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    Voltar ao Site
+                    <i class="fas fa-arrow-left"></i> Voltar ao Site
                 </a>
                 <div class="sidebar-logo">
                     <img src="https://raw.githubusercontent.com/admyacm-hub/caiv-cam/main/RUID6f3c7ef43d3147a99722ed3b25f6b050.jpeg" alt="CAIVCAM">
                 </div>
                 <h2>CAIVCAM</h2>
-                <p>Painel Administrativo</p>
             </div>
             <ul class="sidebar-menu">
                 <li><a class="active" onclick="switchTab('dashboard', this)"><i class="fas fa-chart-line"></i> Dashboard</a></li>
@@ -799,30 +626,23 @@
                 <li><a onclick="switchTab('idosos', this)"><i class="fas fa-user-friends"></i> Idosos</a></li>
                 <li><a onclick="switchTab('config', this)"><i class="fas fa-cog"></i> Configurações</a></li>
             </ul>
-            <div class="sidebar-footer">
-                <p>&copy; 2026 CAIVCAM - v1.0</p>
-            </div>
         </div>
 
         <div class="main-content">
             <div class="main-header">
-                <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
-                    <h2 id="page-title" style="color: var(--primary-purple);">Dashboard</h2>
-                </div>
-                <div class="user-info">
+                <h2 id="page-title">Dashboard</h2>
+                <div style="display: flex; align-items: center; gap: 10px;">
                     <div class="user-avatar">G</div>
-                    <span>Gestor</span>
-                    <button class="btn-action btn-danger" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+                    <button class="btn-action btn-danger" onclick="handleLogout()">Sair</button>
                 </div>
             </div>
 
             <div class="content-area">
-                <!-- DASHBOARD -->
+                <!-- DASHBOARD MELHORADA -->
                 <div id="dashboard" class="tab-content active">
                     <div class="filter-bar">
                         <div class="filter-group">
-                            <label><i class="fas fa-filter"></i> Período:</label>
+                            <label>Período:</label>
                             <select id="timeFilter" onchange="updateDashboard()">
                                 <option value="all">Todos</option>
                                 <option value="today">Hoje</option>
@@ -834,17 +654,17 @@
                             </select>
                         </div>
                         <div class="filter-group">
-                            <button class="btn-action btn-success" onclick="exportData('csv')"><i class="fas fa-file-csv"></i> CSV</button>
-                            <button class="btn-action" onclick="exportData('json')"><i class="fas fa-file-code"></i> JSON</button>
-                            <button class="btn-action btn-warning" onclick="printReport()"><i class="fas fa-print"></i> Imprimir</button>
-                            <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
+                            <button class="btn-action btn-success" onclick="exportData('csv')">CSV</button>
+                            <button class="btn-action" onclick="exportData('json')">JSON</button>
+                            <button class="btn-action btn-warning" onclick="printReport()">Imprimir</button>
+                            <button class="btn-action" onclick="openNewRecordModal()">+ Novo</button>
                         </div>
                     </div>
 
                     <div class="card-grid" id="dashboardMetrics"></div>
 
                     <div class="chart-container">
-                        <h4><i class="fas fa-chart-bar"></i> Atendimentos por Período</h4>
+                        <h4>Atendimentos Mensais</h4>
                         <canvas id="dashboardChart"></canvas>
                     </div>
 
@@ -852,7 +672,15 @@
                         <h4 style="padding: 15px;">Registos Recentes</h4>
                         <table class="data-table">
                             <thead>
-                                <tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Data</th>
+                                    <th>Contacto</th>
+                                    <th>Estado</th>
+                                    <th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="dashboardTableBody"></tbody>
                         </table>
@@ -862,26 +690,25 @@
                 <!-- REGISTOS -->
                 <div id="registos" class="tab-content">
                     <div class="filter-bar">
-                        <div class="filter-group">
-                            <input type="text" id="searchInput" placeholder="🔍 Buscar..." onkeyup="filterRecords()">
-                        </div>
-                        <div class="filter-group">
-                            <select id="categoryFilter" onchange="filterRecords()">
-                                <option value="">Todas as Categorias</option>
-                                <option value="psicologico">Psicológico</option>
-                                <option value="juridico">Jurídico</option>
-                                <option value="familiar">Familiar</option>
-                                <option value="criancas">Crianças</option>
-                                <option value="alimentos">Alimentos</option>
-                                <option value="idosos">Idosos</option>
-                                <option value="comunidade">Comunidade</option>
-                            </select>
-                        </div>
+                        <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="filterRecords()">
+                        <select id="categoryFilter" onchange="filterRecords()">
+                            <option value="">Todas</option>
+                            <option value="psicologico">Psicológico</option>
+                            <option value="juridico">Jurídico</option>
+                            <option value="familiar">Familiar</option>
+                            <option value="criancas">Crianças</option>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="idosos">Idosos</option>
+                            <option value="comunidade">Comunidade</option>
+                        </select>
                     </div>
                     <div class="table-responsive">
                         <table class="data-table">
                             <thead>
-                                <tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Descrição</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>ID</th><th>Nome</th><th>Categoria</th><th>Descrição</th>
+                                    <th>Data</th><th>Contacto</th><th>Estado</th><th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="allRecordsBody"></tbody>
                         </table>
@@ -890,14 +717,14 @@
 
                 <!-- PSICOLÓGICO -->
                 <div id="psicologico" class="tab-content">
-                    <div class="filter-bar">
-                        <h3><i class="fas fa-brain"></i> Atendimentos Psicológicos</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
-                    </div>
+                    <h3>Atendimentos Psicológicos</h3>
                     <div class="table-responsive">
                         <table class="data-table">
                             <thead>
-                                <tr><th>ID</th><th>Paciente</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>ID</th><th>Nome</th><th>Descrição</th>
+                                    <th>Data</th><th>Contacto</th><th>Estado</th><th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="psychBody"></tbody>
                         </table>
@@ -906,14 +733,14 @@
 
                 <!-- JURÍDICO -->
                 <div id="juridico" class="tab-content">
-                    <div class="filter-bar">
-                        <h3><i class="fas fa-gavel"></i> Processos Jurídicos</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
-                    </div>
+                    <h3>Processos Jurídicos</h3>
                     <div class="table-responsive">
                         <table class="data-table">
                             <thead>
-                                <tr><th>ID</th><th>Cliente</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>ID</th><th>Nome</th><th>Descrição</th>
+                                    <th>Data</th><th>Contacto</th><th>Estado</th><th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="legalBody"></tbody>
                         </table>
@@ -922,14 +749,14 @@
 
                 <!-- FAMILIAR -->
                 <div id="familiar" class="tab-content">
-                    <div class="filter-bar">
-                        <h3><i class="fas fa-users"></i> Casos Familiares</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
-                    </div>
+                    <h3>Casos Familiares</h3>
                     <div class="table-responsive">
                         <table class="data-table">
                             <thead>
-                                <tr><th>ID</th><th>Família</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>ID</th><th>Nome</th><th>Descrição</th>
+                                    <th>Data</th><th>Contacto</th><th>Estado</th><th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="familyBody"></tbody>
                         </table>
@@ -938,41 +765,27 @@
 
                 <!-- IDOSOS -->
                 <div id="idosos" class="tab-content">
-                    <div class="filter-bar">
-                        <h3><i class="fas fa-user-friends"></i> Casos de Idosos</h3>
-                        <button class="btn-action" onclick="openNewRecordModal()"><i class="fas fa-plus"></i> Novo</button>
-                    </div>
+                    <h3>Casos de Idosos</h3>
                     <div class="table-responsive">
                         <table class="data-table">
                             <thead>
-                                <tr><th>ID</th><th>Idoso</th><th>Descrição</th><th>Contacto</th><th>Data</th><th>Estado</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>ID</th><th>Nome</th><th>Descrição</th>
+                                    <th>Data</th><th>Contacto</th><th>Estado</th><th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="elderlyBody"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- CONFIGURAÇÕES -->
+                <!-- CONFIG -->
                 <div id="config" class="tab-content">
-                    <div class="card-grid">
-                        <div class="metric-card">
-                            <i class="fas fa-database"></i>
-                            <h3>Backup</h3>
-                            <button class="btn-action btn-success" onclick="backupData()">Fazer Backup</button>
-                        </div>
-                        <div class="metric-card">
-                            <i class="fas fa-trash-alt"></i>
-                            <h3>Limpar Dados</h3>
-                            <button class="btn-action btn-danger" onclick="clearData()">Limpar Tudo</button>
-                        </div>
-                        <div class="metric-card">
-                            <i class="fas fa-key"></i>
-                            <h3>Alterar Senha</h3>
-                            <button class="btn-action" onclick="showPasswordModal()">Alterar</button>
-                        </div>
-                    </div>
+                    <h3>Configurações</h3>
+                    <button class="btn-action btn-success" onclick="backupData()">Backup</button>
+                    <button class="btn-action btn-danger" onclick="clearData()">Limpar Dados</button>
+                    <button class="btn-action" onclick="showPasswordModal()">Alterar Senha</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -983,29 +796,25 @@
         let dashboardChart = null;
 
         const initialRecords = [
-            { id: 1, name: 'Maria Silva', category: 'idosos', categoryLabel: 'Abandono de Idosos', description: 'Caso de abandono familiar', contact: '923456789', date: '2026-09-01', status: 'Em Acompanhamento', type: 'psicologico' },
-            { id: 2, name: 'João Santos', category: 'alimentos', categoryLabel: 'Paternidade & Alimentos', description: 'Fuga à prestação de alimentos', contact: '912345678', date: '2026-08-31', status: 'Encaminhado', type: 'juridico' },
-            { id: 3, name: 'Anônimo', category: 'psicologico', categoryLabel: 'Atendimento Psicológico', description: 'Violência psicológica', contact: '', date: '2026-08-30', status: 'Concluído', type: 'psicologico' },
+            { id: 1, name: 'Maria Silva', category: 'idosos', categoryLabel: 'Abandono de Idosos', description: 'Abandono familiar', contact: '923456789', date: '2026-09-01', status: 'Em Acompanhamento', type: 'psicologico' },
+            { id: 2, name: 'João Santos', category: 'alimentos', categoryLabel: 'Paternidade & Alimentos', description: 'Fuga à prestação', contact: '912345678', date: '2026-08-31', status: 'Encaminhado', type: 'juridico' },
+            { id: 3, name: 'Anônimo', category: 'psicologico', categoryLabel: 'Psicológico', description: 'Violência psicológica', contact: '', date: '2026-08-30', status: 'Concluído', type: 'psicologico' },
             { id: 4, name: 'Criança A', category: 'criancas', categoryLabel: 'Crianças Violentadas', description: 'Proteção infantil', contact: '', date: '2026-08-29', status: 'Em Acompanhamento', type: 'psicologico' },
             { id: 5, name: 'Família B', category: 'familiar', categoryLabel: 'Famílias Vulneráveis', description: 'Reinserção social', contact: '934567890', date: '2026-08-28', status: 'Em Acompanhamento', type: 'social' },
-            { id: 6, name: 'António Costa', category: 'idosos', categoryLabel: 'Abandono de Idosos', description: 'Idoso sem suporte familiar', contact: '945678901', date: '2026-06-15', status: 'Concluído', type: 'psicologico' },
+            { id: 6, name: 'António Costa', category: 'idosos', categoryLabel: 'Abandono de Idosos', description: 'Idoso sem suporte', contact: '945678901', date: '2026-06-15', status: 'Concluído', type: 'psicologico' },
             { id: 7, name: 'Família C', category: 'comunidade', categoryLabel: 'Conflitos Comunitários', description: 'Disputa de terrenos', contact: '956789012', date: '2026-04-10', status: 'Encaminhado', type: 'social' },
-            { id: 8, name: 'Rosa Mendes', category: 'juridico', categoryLabel: 'Atendimento Jurídico', description: 'Processo de divórcio', contact: '967890123', date: '2026-03-20', status: 'Concluído', type: 'juridico' },
-            { id: 9, name: 'Criança B', category: 'criancas', categoryLabel: 'Crianças Violentadas', description: 'Caso de negligência', contact: '', date: '2026-02-05', status: 'Em Acompanhamento', type: 'psicologico' },
+            { id: 8, name: 'Rosa Mendes', category: 'juridico', categoryLabel: 'Jurídico', description: 'Processo de divórcio', contact: '967890123', date: '2026-03-20', status: 'Concluído', type: 'juridico' },
+            { id: 9, name: 'Criança B', category: 'criancas', categoryLabel: 'Crianças Violentadas', description: 'Negligência', contact: '', date: '2026-02-05', status: 'Em Acompanhamento', type: 'psicologico' },
             { id: 10, name: 'Família D', category: 'familiar', categoryLabel: 'Famílias Vulneráveis', description: 'Apoio alimentar', contact: '978901234', date: '2026-01-18', status: 'Concluído', type: 'social' }
         ];
 
         function handleLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            
             if (username === 'admin_caivcam' && password === 'CaivCam2026') {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('app-container').classList.add('active');
-                if (records.length === 0) {
-                    records = [...initialRecords];
-                    nextId = 11;
-                }
+                if (records.length === 0) { records = [...initialRecords]; nextId = 11; }
                 updateAllTables();
                 initChart();
             } else {
@@ -1024,20 +833,7 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            if (element) {
-                element.classList.add('active');
-                document.getElementById('page-title').innerHTML = element.innerHTML;
-            }
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('sidebar').classList.toggle('mobile-open');
-            document.getElementById('sidebar-overlay').classList.toggle('active');
-        }
-
-        function closeMobileMenu() {
-            document.getElementById('sidebar').classList.remove('mobile-open');
-            document.getElementById('sidebar-overlay').classList.remove('active');
+            if (element) { element.classList.add('active'); document.getElementById('page-title').textContent = element.textContent.trim(); }
         }
 
         function updateAllTables() {
@@ -1055,26 +851,26 @@
             let filteredRecords = [...records];
             const today = new Date();
             const todayStr = today.toISOString().split('T')[0];
-            
+
             if (timeFilter === 'today') {
                 filteredRecords = filteredRecords.filter(r => r.date === todayStr);
             } else if (timeFilter === 'week') {
-                const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+                const weekAgo = new Date(today.getTime() - 7 * 86400000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= weekAgo);
             } else if (timeFilter === 'month') {
-                const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+                const monthAgo = new Date(today.getTime() - 30 * 86400000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= monthAgo);
             } else if (timeFilter === 'quarter') {
-                const quarterAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+                const quarterAgo = new Date(today.getTime() - 90 * 86400000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= quarterAgo);
             } else if (timeFilter === 'semester') {
-                const semesterAgo = new Date(today.getTime() - 180 * 24 * 60 * 60 * 1000);
+                const semesterAgo = new Date(today.getTime() - 180 * 86400000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= semesterAgo);
             } else if (timeFilter === 'year') {
-                const yearAgo = new Date(today.getTime() - 365 * 24 * 60 * 60 * 1000);
+                const yearAgo = new Date(today.getTime() - 365 * 86400000);
                 filteredRecords = filteredRecords.filter(r => new Date(r.date) >= yearAgo);
             }
-            
+
             const metrics = {
                 total: filteredRecords.length,
                 psicologico: filteredRecords.filter(r => r.type === 'psicologico').length,
@@ -1083,7 +879,7 @@
                 ativos: filteredRecords.filter(r => r.status === 'Em Acompanhamento').length,
                 concluidos: filteredRecords.filter(r => r.status === 'Concluído').length
             };
-            
+
             document.getElementById('dashboardMetrics').innerHTML = `
                 <div class="metric-card"><i class="fas fa-file-alt"></i><h3>Total</h3><div class="value">${metrics.total}</div></div>
                 <div class="metric-card"><i class="fas fa-brain"></i><h3>Psicológicos</h3><div class="value">${metrics.psicologico}</div></div>
@@ -1092,29 +888,51 @@
                 <div class="metric-card"><i class="fas fa-clock"></i><h3>Ativos</h3><div class="value">${metrics.ativos}</div></div>
                 <div class="metric-card"><i class="fas fa-check-circle"></i><h3>Concluídos</h3><div class="value">${metrics.concluidos}</div></div>
             `;
-            
+
             const tableBody = document.getElementById('dashboardTableBody');
             tableBody.innerHTML = '';
             filteredRecords.slice(0, 10).forEach(record => {
                 const row = tableBody.insertRow();
-                row.innerHTML = createTableRow(record);
+                row.innerHTML = createDashboardRow(record);
             });
         }
 
-        function createTableRow(record, prefix = 'CC') {
+        // Função específica para a tabela do dashboard (ordem correta)
+        function createDashboardRow(record) {
             return `
-                <td><strong>#${prefix}-${record.id.toString().padStart(4, '0')}</strong></td>
+                <td><strong>#CC-${record.id.toString().padStart(4, '0')}</strong></td>
                 <td>${record.name}</td>
                 <td>${record.categoryLabel}</td>
-                <td>${record.description}</td>
+                <td>${formatDate(record.date)}</td>
                 <td>${record.contact || '-'}</td>
-                <td>${record.date}</td>
                 <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
                 <td>
                     <button class="btn-action btn-sm" onclick="viewRecord(${record.id})"><i class="fas fa-eye"></i></button>
                     <button class="btn-action btn-sm btn-danger" onclick="deleteRecord(${record.id})"><i class="fas fa-trash"></i></button>
                 </td>
             `;
+        }
+
+        // Função genérica para outras tabelas
+        function createTableRow(record, prefix = 'CC') {
+            return `
+                <td><strong>#${prefix}-${record.id.toString().padStart(4, '0')}</strong></td>
+                <td>${record.name}</td>
+                <td>${record.categoryLabel}</td>
+                <td>${record.description}</td>
+                <td>${formatDate(record.date)}</td>
+                <td>${record.contact || '-'}</td>
+                <td><span class="status-badge status-${getStatusClass(record.status)}">${record.status}</span></td>
+                <td>
+                    <button class="btn-action btn-sm" onclick="viewRecord(${record.id})"><i class="fas fa-eye"></i></button>
+                    <button class="btn-action btn-sm btn-danger" onclick="deleteRecord(${record.id})"><i class="fas fa-trash"></i></button>
+                </td>
+            `;
+        }
+
+        function formatDate(dateStr) {
+            const parts = dateStr.split('-');
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
         }
 
         function getStatusClass(status) {
@@ -1181,7 +999,7 @@
                     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                     datasets: [{
                         label: 'Atendimentos',
-                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        data: new Array(12).fill(0),
                         backgroundColor: 'rgba(90, 45, 130, 0.6)',
                         borderColor: '#5a2d82',
                         borderWidth: 1
@@ -1197,15 +1015,11 @@
 
         function updateChart() {
             if (dashboardChart) {
-                const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
                 const data = new Array(12).fill(0);
-                
                 records.forEach(r => {
                     const date = new Date(r.date);
                     data[date.getMonth()]++;
                 });
-                
-                dashboardChart.data.labels = months;
                 dashboardChart.data.datasets[0].data = data;
                 dashboardChart.update();
             }
@@ -1213,7 +1027,11 @@
 
         function openNewRecordModal() {
             document.getElementById('newRecordModal').classList.add('active');
-            document.getElementById('newRecordForm').reset();
+            document.getElementById('recordName').value = '';
+            document.getElementById('recordDescription').value = '';
+            document.getElementById('recordContact').value = '';
+            document.getElementById('recordCategory').value = '';
+            document.getElementById('recordStatus').value = 'Em Acompanhamento';
         }
 
         function closeModal() {
@@ -1237,7 +1055,7 @@
             records.unshift(newRecord);
             updateAllTables();
             closeModal();
-            alert('✅ Registo criado com sucesso!\n\nID: #CC-' + newRecord.id.toString().padStart(4, '0'));
+            alert('Registo criado com sucesso!');
         }
 
         function getCategoryLabel(category) {
@@ -1256,19 +1074,12 @@
         function viewRecord(id) {
             const record = records.find(r => r.id === id);
             if (record) {
-                alert('📋 Detalhes do Registo\n\n' +
-                      'ID: #CC-' + record.id.toString().padStart(4, '0') + '\n' +
-                      'Nome: ' + record.name + '\n' +
-                      'Categoria: ' + record.categoryLabel + '\n' +
-                      'Descrição: ' + record.description + '\n' +
-                      'Contacto: ' + (record.contact || 'Não fornecido') + '\n' +
-                      'Data: ' + record.date + '\n' +
-                      'Estado: ' + record.status);
+                alert('ID: #CC-' + record.id + '\nNome: ' + record.name + '\nCategoria: ' + record.categoryLabel + '\nDescrição: ' + record.description + '\nData: ' + formatDate(record.date) + '\nEstado: ' + record.status);
             }
         }
 
         function deleteRecord(id) {
-            if (confirm('Tem certeza que deseja apagar este registo?')) {
+            if (confirm('Apagar este registo?')) {
                 records = records.filter(r => r.id !== id);
                 updateAllTables();
             }
@@ -1277,15 +1088,11 @@
         function filterRecords() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
-            
             const filteredRecords = records.filter(record => {
-                const matchesSearch = record.name.toLowerCase().includes(searchTerm) ||
-                                     record.description.toLowerCase().includes(searchTerm) ||
-                                     record.categoryLabel.toLowerCase().includes(searchTerm);
+                const matchesSearch = record.name.toLowerCase().includes(searchTerm) || record.description.toLowerCase().includes(searchTerm);
                 const matchesCategory = !categoryFilter || record.category === categoryFilter;
                 return matchesSearch && matchesCategory;
             });
-            
             const tableBody = document.getElementById('allRecordsBody');
             tableBody.innerHTML = '';
             filteredRecords.forEach(record => {
@@ -1295,17 +1102,10 @@
         }
 
         function exportData(format) {
-            const data = records.map(r => ({
-                id: r.id, nome: r.name, categoria: r.categoryLabel,
-                descricao: r.description, contacto: r.contact,
-                data: r.date, estado: r.status
-            }));
-            
+            const data = records.map(r => ({ id: r.id, nome: r.name, categoria: r.categoryLabel, descricao: r.description, contacto: r.contact, data: r.date, estado: r.status }));
             if (format === 'csv') {
                 let csv = 'ID;Nome;Categoria;Descrição;Contacto;Data;Estado\n';
-                data.forEach(r => {
-                    csv += `${r.id};"${r.nome}";"${r.categoria}";"${r.descricao}";"${r.contacto}";${r.data};"${r.estado}"\n`;
-                });
+                data.forEach(r => { csv += `${r.id};"${r.nome}";"${r.categoria}";"${r.descricao}";"${r.contacto}";${r.data};"${r.estado}"\n`; });
                 downloadFile(csv, 'caivcam_registos.csv', 'text/csv;charset=utf-8');
             } else if (format === 'json') {
                 downloadFile(JSON.stringify(data, null, 2), 'caivcam_registos.json', 'application/json');
@@ -1326,56 +1126,46 @@
 
         function printReport() {
             const printWindow = window.open('', '_blank');
-            printWindow.document.write('<html><head><title>Relatório CAIVCAM</title>');
-            printWindow.document.write('<style>table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #ddd; padding: 8px; } th { background: #5a2d82; color: white; }</style></head><body>');
-            printWindow.document.write('<h1 style="color:#5a2d82;">Relatório CAIVCAM</h1>');
+            printWindow.document.write('<h2>Relatório CAIVCAM</h2>');
             printWindow.document.write('<p>Data: ' + new Date().toLocaleDateString('pt-PT') + '</p>');
-            printWindow.document.write('<p>Total: ' + records.length + ' registos</p>');
-            printWindow.document.write('<table><tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
+            printWindow.document.write('<table border="1" style="border-collapse: collapse; width: 100%;">');
+            printWindow.document.write('<tr style="background: #5a2d82; color: white;"><th>ID</th><th>Nome</th><th>Categoria</th><th>Data</th><th>Estado</th></tr>');
             records.forEach(r => {
-                printWindow.document.write(`<tr><td>#CC-${r.id}</td><td>${r.name}</td><td>${r.categoryLabel}</td><td>${r.date}</td><td>${r.status}</td></tr>`);
+                printWindow.document.write(`<tr><td>#CC-${r.id}</td><td>${r.name}</td><td>${r.categoryLabel}</td><td>${formatDate(r.date)}</td><td>${r.status}</td></tr>`);
             });
-            printWindow.document.write('</table></body></html>');
+            printWindow.document.write('</table>');
             printWindow.document.close();
             printWindow.print();
         }
 
-        function backupData() {
-            exportData('json');
-            alert('✅ Backup criado com sucesso!');
-        }
-
+        function backupData() { exportData('json'); alert('Backup criado!'); }
+        
         function clearData() {
-            if (confirm('⚠️ Apagar TODOS os registos?')) {
-                if (confirm('Confirmação final?')) {
-                    records = [];
-                    nextId = 1;
-                    updateAllTables();
-                    alert('✅ Dados apagados.');
-                }
+            if (confirm('Apagar TODOS os registos?')) {
+                records = [];
+                nextId = 1;
+                updateAllTables();
+                alert('Dados apagados.');
             }
         }
 
         function showPasswordModal() {
             const currentPass = prompt('Palavra-passe atual:');
             if (currentPass === 'CaivCam2026') {
-                const newPass = prompt('Nova palavra-passe (mínimo 6 caracteres):');
+                const newPass = prompt('Nova palavra-passe:');
                 if (newPass && newPass.length >= 6) {
-                    alert('✅ Senha alterada com sucesso!');
+                    alert('Senha alterada!');
                 } else {
-                    alert('❌ A nova senha deve ter pelo menos 6 caracteres.');
+                    alert('Senha deve ter 6+ caracteres.');
                 }
             } else {
-                alert('❌ Palavra-passe atual incorreta.');
+                alert('Senha atual incorreta.');
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('password').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') handleLogin();
-            });
-            document.getElementById('newRecordModal').addEventListener('click', function(e) {
-                if (e.target === this) closeModal();
             });
         });
     </script>
